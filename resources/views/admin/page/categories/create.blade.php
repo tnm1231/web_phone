@@ -12,45 +12,54 @@
                         <div class="col-xl-4 col-md-6 col-12">
                             <div class="mb-1">
                                 <label class="form-label" for="basicInput">Name Category</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" id="name" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-xl-4 col-md-6 col-12">
                             <div class="mb-1">
                                 <label class="form-label" for="basicInput">Slug Category</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" id="slug" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group col-xl-4 col-md-6 col-12">
                         <label class="form-label" for="basicInput">Parent_id</label>
-                            <select class="form-control" id="select-country1" required="">
-                                <option value="">Select Country</option>
-                                <option value="usa">USA</option>
-                                <option value="uk">UK</option>
-                                <option value="france">France</option>
-                                <option value="australia">Australia</option>
-                                <option value="spain">Spain</option>
+                        <select class="form-control" id="parent_id" required="">
+                                <option value=0> Root </option>
+                                @foreach ($category as $value)
+                                <option value={{$value->id}}> {{$value->name}} </option>
+                                @endforeach
                             </select>
-                            <div class="valid-feedback">Looks good!</div>
-                            <div class="invalid-feedback">Please select your country</div>
                         </div>
                         <div class="form-group col-xl-6 col-md-6 col-12">
                         <label class="form-label" for="basicInput">Is_view</label>
-                            <select class="form-control" id="select-country1" required="">
-                                <option value="">Choose..</option>
+                            <select class="form-control" id="is_view" required="">
+                                <option value="">Choose...</option>
                                 <option value=1>Visible</option>
                                 <option value=0>Disable</option>
                             </select>
                         </div>
-                        <div class="col-xl-6 col-md-6 col-12">
-                            <div class="mb-1">
-                                <label class="form-label" for="helperText">Banner</label>
-                                <input type="text" id="helperText" class="form-control">
-                            </div>
-                        </div>
+
+                        <div class="form-group col-xl-6 col-md-6 col-12">
                         <div class="row">
+                            <div class="col-md-12">
+                            <label class="form-label" for="basicInput">Banner</label>
+                            <div class="input-group">
+                                <input id="banner" name="image" class="form-control" required>
+                                <a data-input="banner" data-preview="holder-image" class="lfm btn btn-light"> Choose </a>
+                            </div>
+                            <img id="holder-image" class="img-thumbnail" style="max-height: 300px">
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+                            <script>
+                                  $('.lfm').filemanager('banner');
+                            </script>
+                        </div>
+                        </div>
+                          
+                        <div class="row" style="margin-top: 20px;">
                             <div class="col-4">
-                            <button type="button" class="btn btn-outline-success round waves-effect">Success</button>
+                            <button type="button" id="createCategory" class="btn btn-outline-success round waves-effect">Button</button>
                             </div>
                         </div>
                     </div>
@@ -59,4 +68,63 @@
         </div>
     </div>
 </section>
+@endsection
+@section('js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+   <script>
+    $(document).ready(function(){
+            $("#name").blur(function(){
+                $("#slug").val(toSlug($("#name").val()));
+            });
+
+            function toSlug(str) {
+                str = str.toLowerCase();
+                str = str
+                    .normalize('NFD') // chuyển chuỗi sang unicode tổ hợp
+                    .replace(/[\u0300-\u036f]/g, ''); // xóa các ký tự dấu sau khi tách tổ hợp
+                str = str.replace(/[đĐ]/g, 'd');
+                str = str.replace(/([^0-9a-z-\s])/g, '');
+                str = str.replace(/(\s+)/g, '-');
+                str = str.replace(/-+/g, '-');
+                str = str.replace(/^-+|-+$/g, '');
+                return str;
+            }
+            $("#createCategory").click(function(){
+
+                var payload = {
+                    'name'              :   $("#name").val(),
+                    'slug'              :   $("#slug").val(),
+                    'parent_id'         :   $("#parent_id").val(),
+                    'is_view'           :   $("#is_view").val(),
+                    'banner'            :   $("#banner").val(),
+
+                };
+                $.ajax({
+                    url : '/admin/category/create',
+                    type: 'post',
+                    data: payload,
+                    success: function($xxx){
+                        if($xxx.status == true){
+                            toastr.success("You are create product successfully!");
+                        }
+                        location.reload();
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
+     });
+
+</script>
+  
 @endsection

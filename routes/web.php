@@ -19,5 +19,6 @@ Route::get('/', function () {
 Route::get('/test', function() {
      return view('admin.share.master');
 });
-Route::get('/admin/category/create', [\App\Http\Controllers\CategoryController::class, 'index']);
+Route::get('/admin/category/create', [\App\Http\Controllers\CategoryController::class, 'create']);
+Route::post('/admin/category/create', [\App\Http\Controllers\CategoryController::class, 'store']);
 
