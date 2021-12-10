@@ -47,7 +47,7 @@
                                 <input id="banner" name="image" class="form-control" required>
                                 <a data-input="banner" data-preview="holder-image" class="lfm btn btn-light"> Choose </a>
                             </div>
-                            <img id="holder-image" class="img-thumbnail" style="max-height: 300px">
+                            <img id="holder-image" class="card-img-top" style="width:300px; height:300px">
                             </div>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                             <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
@@ -56,7 +56,7 @@
                             </script>
                         </div>
                         </div>
-                          
+
                         <div class="row" style="margin-top: 20px;">
                             <div class="col-4">
                             <button type="button" id="createCategory" class="btn btn-outline-success round waves-effect">Button</button>
@@ -126,5 +126,4 @@
      });
 
 </script>
-  
 @endsection

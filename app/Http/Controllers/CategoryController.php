@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use Illuminate\Http\Request;
-use App\Http\Requests\categoryRequest;
+use App\Http\Requests\Admin\Category\categoryRequest;
+use App\Http\Requests\Admin\Category\updateRequest;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
+        $listCategory = DB::table('categories as A')
+                        ->leftJoin('categories as B', 'A.parent_id', 'B.id')
+                        ->select('A.*', 'B.name as nameParent')
+                        ->get();
+        $category = category::where('parent_id', 0)->get();
+
+        return view('admin.page.categories.listCategory', compact('listCategory','category'));
+
+
+
+
     }
 
     /**
@@ -43,6 +55,21 @@ class CategoryController extends Controller
         return response()->json(['status' => true]);
     }
 
+
+    public function updateIsview($id)
+    {
+        $category = category::find($id);
+
+        if($category){
+            $category->is_view = ($category->is_view + 1) % 2;
+            $category->save();
+
+            return response()->json(true);
+        }
+
+        return response()->json(false);
+
+    }
     /**
      * Display the specified resource.
      *
@@ -60,9 +87,16 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(category $category)
+    public function edit($id)
     {
-        //
+        $category = category::find($id);
+
+        if($category){
+            return response()->json(["data" => $category]);
+        }else {
+            toastr()->error("Category does not exits");
+            return $this->index();
+        }
     }
 
     /**
@@ -72,9 +106,13 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(updateRequest $request)
     {
-        //
+        $data = $request->all();
+        $category = category::find($request->id);
+        $category->update($data);
+        return response()->json(['status' => true]);
+
     }
 
     /**
@@ -83,8 +121,32 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category)
+    public function destroy_only($id)
     {
-        //
+        $category = category::find($id);
+        if($category){
+            $category->delete();
+            $listCate = category::where('parent_id', $id)->get();
+            foreach ($listCate as $key => $value) {
+                $value->parent_id=0;
+                $value->save();
+            }
+        return response()->json(true);
+
+        }
+        return response()->json(false);
+    }
+    public function destroy_all($id)
+    {
+        $category = category::find($id);
+        if($category) {
+            $category->delete();
+            $listCate = category::where('parent_id', $id)->get();
+            foreach ($listCate as $key => $value){
+                $value->delete();
+            }
+            return response()->json(true);
+        }
+        return response()->json(false);
     }
 }
