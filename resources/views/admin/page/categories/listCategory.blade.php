@@ -235,8 +235,6 @@ $(document).ready(function() {
 <script>
     $(document).ready(function() {
 
-
-
     var table = $('#datatable').DataTable();
 
     table.on('click', '.callEdit', function() {

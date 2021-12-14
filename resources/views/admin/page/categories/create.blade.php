@@ -47,7 +47,7 @@
                                 <input id="banner" name="image" class="form-control" required>
                                 <a data-input="banner" data-preview="holder-image" class="lfm btn btn-light"> Choose </a>
                             </div>
-                            <img id="holder-image" class="card-img-top" style="width:300px; height:300px">
+                            <img id="holder-image" class="card-img-top" style="width:500px; height:300px; margin-top:30px">
                             </div>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                             <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
@@ -111,7 +111,7 @@
                     data: payload,
                     success: function($xxx){
                         if($xxx.status == true){
-                            toastr.success("You are create product successfully!");
+                            toastr.success("Created category successfully!");
                         }
                         location.reload();
                     },

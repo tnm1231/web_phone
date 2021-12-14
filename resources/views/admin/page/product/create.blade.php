@@ -19,16 +19,16 @@
                         </div>
                         <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
                             <label class="form-label" for="basicInput">Category_Id</label>
-                        <select class="form-control" id="category-id" required="">
+                        <select class="form-control" id="category_id" required="">
                             <option value=0> Root </option>
-                            {{-- @foreach ($categories as $value)
+                            @foreach ($category as $value)
                             <option value={{$value->id}}> {{$value->name}} </option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         </div>
                         <div class="col-xl-3 col-md-4 col-sm-12 mb-2">
                             <label class="form-label">Code Product</label>
-                            <input type="text" class="form-control credit-card-mask" placeholder="" id="code">
+                            <input type="text" class="form-control credit-card-mask" placeholder="" id="code_product">
                         </div>
 
                         <div class="col-xl-3 col-md-3 col-sm-12 mb-2">
@@ -43,20 +43,30 @@
                             <label class="form-label">Price sale</label>
                             <input type="number" class="form-control credit-card-mask" placeholder="" id="price_sale">
                         </div>
-                        <div class="col-xl-3 col-md-3 col-sm-12 mb-2">
-                            <label class="form-label" for="select2-multiple">Color</label>
-                            <div class="position-relative"><select class="select2 form-select select2-hidden-accessible" id="select2-multiple" multiple="" data-select2-id="select2-multiple" tabindex="-1" aria-hidden="true">
-                                <optgroup label="Choose...">
+                        <div class="col-xl-2 col-md-3 col-sm-12 mb-2">
+                            <label class="form-label" for="basicInput">Select Version</label>
+                            <select class="form-control" id="version" required="">
+                                    <option value="">Choose...</option>
                                     <option value="0">Null</option>
+                                    <option value="1">64 GB</option>
+                                    <option value="2">128 GB</option>
+                                    <option value="3">256 GB</option>
+                                    <option value="4">512 GB</option>
+                                    <option value="5">1 TB</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-2 col-md-3 col-sm-12 mb-2">
+                            <label class="form-label" for="basicInput">Color</label>
+                            <select class="form-control" id="color" required="">
+                                    <option value="">Choose...</option>
+                                    <option value="0">No Color</option>
                                     <option value="1">White</option>
                                     <option value="2">Red</option>
                                     <option value="3">Blue</option>
                                     <option value="4">Black</option>
                                     <option value="5">Green</option>
                                     <option value="6">Yellow</option>
-                                    <option value="">Other...</option>
-                                </optgroup>
-                            </select></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+                            </select>
                         </div>
                         <div class="col-xl-2 col-md-3 col-sm-12 mb-2">
                             <label class="form-label" for="basicInput">Is_view</label>
@@ -71,11 +81,11 @@
                             <select id="status" class="form-control" required="">
                                 <option>Choose...</option>
                                 {{-- hàng có sẵn --}}
-                                <option value="1">Available</option>
+                                <option value="0">Available</option>
                                 {{-- hết hàng --}}
-                                <option value="2">Out of stock</option>
+                                <option value="1">Out of stock</option>
                                 {{-- sắp ra mắt --}}
-                                <option value="3">Comming soon</option>
+                                <option value="2">Comming soon</option>
                             </select>
                         </div>
                         <div class="col-xl-3 col-md-3 col-sm-12 mb-2">
@@ -90,8 +100,8 @@
                         <div class="col-xl-4 col-md-3 col-sm-12 mb-2">
                             <label class="form-label" for="basicInput">Image</label>
                             <div class="input-group">
-                              <input name="banner" id="banner" class="form-control" required>
-                              <a id="lfm" data-input="banner" data-preview="holderbanner" class="lfm btn btn-light">
+                              <input name="image_product" id="image_product" class="form-control" required>
+                              <a id="lfm" data-input="image_product" data-preview="holderbanner" class="lfm btn btn-light">
                                 Choose
                               </a>
                             </div>
@@ -104,20 +114,20 @@
                           </script>
                           <div class="col-xl-8 col-md-3 col-sm-12 mb-2 mt-2">
                             <ul class="nav nav-pills">
-                                <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#information" role="tab"><i data-feather='clipboard'></i>Infor Product</a></li>
+                                <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#info_product" role="tab"><i data-feather='clipboard'></i>Infor Product</a></li>
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#descrpition" role="tab"><i data-feather='edit'></i>Descrpition</a></li>
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#detail" role="tab"><i data-feather='align-justify'></i>Details</a></li>
                                 <li class="nav-item"><a class="nav-link"data-bs-toggle="pill" href="#review" role="tab"><i data-feather='thumbs-up'></i>Review</a></li>
                             </ul>
                             <div class="tab-content">
+                                <div class="tab-pane fade" id="info_product" role="tabpanel">
+                                    <textarea id="ckeditorInfoproduct" cols="30" class="form-control" rows="10"></textarea>
+                                </div>
                                 <div class="tab-pane fade active show file-text"  id="description" role="tabpanel">
                                     <textarea id="ckeditorDescription" cols="30" class="form-control" rows="10"></textarea>
                                 </div>
                                 <div class="tab-pane fade" id="detail" role="tabpanel">
-                                    <textarea  id="ckediorDetail" cols="30" class="form-control" rows="10"></textarea>
-                                </div>
-                                <div class="tab-pane fade" id="information" role="tabpanel">
-                                    <textarea  id="ckeditorInformation" cols="30" class="form-control" rows="10"></textarea>
+                                    <textarea  id="ckeditorDetail" cols="30" class="form-control" rows="10"></textarea>
                                 </div>
                                 <div class="tab-pane fade" id="review" role="tabpanel">
                                     <textarea  id="ckeditorReview" cols="30" class="form-control" rows="10"></textarea>
@@ -134,15 +144,15 @@
                             };
                         </script>
                         <script>
+                            CKEDITOR.replace('ckeditorInfoproduct', options);
                             CKEDITOR.replace('ckeditorDescription', options);
-                            CKEDITOR.replace('ckediorDetail', options);
-                            CKEDITOR.replace('ckeditorInformation', options);
+                            CKEDITOR.replace('ckeditorDetail', options);
                             CKEDITOR.replace('ckeditorReview', options);
                         </script>
 
 
                         <div class="col-xl-3 col-md-12 col-sm-12 mb-2">
-                            <button type="button" class="btn btn-outline-primary round waves-effect">Button</button>
+                            <button type="button" class="btn btn-outline-primary round waves-effect" id="createProduct">Create</button>
                         </div>
                     </div>
                 </div>
@@ -178,7 +188,44 @@
                 str = str.replace(/^-+|-+$/g, '');
                 return str;
             }
-
+            $("#createProduct").click(function(){
+                var payload = {
+                    'name'          :   $("#name").val(),
+                    'slug'          :   $("#slug").val(),
+                    'category_id'   :   $("#category_id").val(),
+                    'code_product'  :   $("#code_product").val(),
+                    'qty'           :   $("#qty").val(),
+                    'price_root'    :   $("#price_root").val(),
+                    'price_sale'    :   $("#price_sale").val(),
+                    'color'         :   $("#color").val(),
+                    'version'       :   $("#version").val(),
+                    'is_view'       :   $("#is_view").val(),
+                    'status'        :   $("#status").val(),
+                    'feature'       :   $("#feature").val(),
+                    'image_product' :   $("#image_product").val(),
+                    'info_product'  :   CKEDITOR.instances["ckeditorInfoproduct"].getData(),
+                    'description'   :   CKEDITOR.instances["ckeditorDescription"].getData(),
+                    'details'       :   CKEDITOR.instances["ckeditorDetail"].getData(),
+                    'reviews'       :   CKEDITOR.instances["ckeditorReview"].getData(),
+                };
+                $.ajax({
+                    url : '/admin/product/create',
+                    type: 'post',
+                    data: payload,
+                    success: function($xxx){
+                        if($xxx.status == true){
+                            toastr.success("Created product successfully!");
+                        }
+                        // location.reload();
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
     });
 </script>
 @endsection

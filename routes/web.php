@@ -31,3 +31,10 @@ Route::post('/admin/category/update/{id}', [\App\Http\Controllers\CategoryContro
 
 
 Route::get('/admin/product/create', [\App\Http\Controllers\ProductController::class, 'create']);
+Route::post('/admin/product/create', [\App\Http\Controllers\ProductController::class, 'store']);
+Route::get('/admin/product/index', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::get('/admin/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'destroy']);
+Route::get('/admin/product/delete/{id}', [\App\Http\Controllers\ProductController::class, 'destroy']);
+Route::post('/changeView', [\App\Http\Controllers\ProductController::class, 'changeValueView'])->name('change.View');
+Route::get('/admin/product/edit/{id}', [\App\Http\Controllers\ProductController::class, 'edit']);
+Route::post('/admin/product/update/{id}', [\App\Http\Controllers\ProductController::class, 'update']);
