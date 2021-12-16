@@ -36,6 +36,7 @@
                         $color = ['No Color', 'White', 'Red', 'Blue', 'Black', 'Green', 'Yellow'];
                         $version = ['Null','64GB', '128GB', '256GB', '512GB','1TB'];
                         $status = ['Available','Out of stock', 'Coming soon'];
+                        $color2 = ['primary', 'danger', 'warning'];
                     @endphp
                         @foreach ($product as $key => $value )
                         <tr class="text-center text-nowrap">
@@ -45,7 +46,13 @@
                             <td>{{ number_format($value->price_sell, 0, ',', '.') }}</td>
                             <td>{{$value->code_product}}</td>
                             <td>{{$value->nameCate}}</td>
-                            <td {{$value->color}}> {{ $color[ $value->color ] }}</td>
+                            {{-- <td {{$value->color}}> {{ $color[ $value->color ] }}</td> --}}
+                            <td>
+                                <a href="app-user-list.html" class="me-50">
+                                    <span class="badge rounded-pill badge-light-primary"> {{ $color[ $value->color ] }}</span>
+                                </a>
+                            </td>
+
                             <td value="{{$value->version}}"> {{ $version[ $value->version ] }}</td>
                             <td>
                                 <span class="btn view {{$value->is_view == 1 ? 'btn-outline-success' : ' btn-outline-danger'}} round waves-effect" data-id="{{$value->id}}">{{ $value->is_view == 1 ? 'Visible' : 'Disable' }} </span>                            </div>
@@ -124,10 +131,11 @@
                                         </div>
                                         <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
                                             <label class="form-label" for="basicInput">Category_Id</label>
-                                        <select class="form-control" id="category_id" required="">
-                                            <option value=0> Root </option>
-                                            @foreach ($product as $value)
-                                            <option value={{$value->id}}> {{$value->nameCate}} </option>
+                                        <select class="form-control" id="category_id" name="category_id">
+                                            {{-- <input type="text" id="nameCate" value={{$value->nameCate}}> --}}
+                                            <option value="0"> Root </option>
+                                            @foreach ($category as $value)
+                                            <option value={{$value->id}}> {{$value->name}} </option>
                                             @endforeach
                                         </select>
                                         </div>
@@ -220,16 +228,16 @@
                                           <div class="col-xl-8 col-md-3 col-sm-12 mb-2 mt-2">
                                             <ul class="nav nav-pills">
                                                 <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#info_product" role="tab"><i data-feather='clipboard'></i>Infor Product</a></li>
-                                                <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#descrpition" role="tab"><i data-feather='edit'></i>Descrpition</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#description" role="tab"><i data-feather='edit'></i>Description</a></li>
                                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#detail" role="tab"><i data-feather='align-justify'></i>Details</a></li>
                                                 <li class="nav-item"><a class="nav-link"data-bs-toggle="pill" href="#review" role="tab"><i data-feather='thumbs-up'></i>Review</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane fade" id="info_product" role="tabpanel">
-                                                    <textarea id="ckeditorInfoproduct" cols="30" class="form-control" rows="10"></textarea>
+                                                    <textarea name="ckeditorInfoproduct" id="ckeditorInfoproduct" cols="30" class="form-control" rows="10"></textarea>
                                                 </div>
                                                 <div class="tab-pane fade active show file-text"  id="description" role="tabpanel">
-                                                    <textarea id="ckeditorDescription" cols="30" class="form-control" rows="10"></textarea>
+                                                    <textarea id="ckeditorDescription" cols="30" class="form-control" rows="10">{{$product->description}}</textarea>
                                                 </div>
                                                 <div class="tab-pane fade" id="detail" role="tabpanel">
                                                     <textarea  id="ckeditorDetail" cols="30" class="form-control" rows="10"></textarea>
@@ -260,7 +268,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-center mt-2 pt-50">
-                        <button type="submit" id="updateCategory" class="btn btn-primary me-1 waves-effect waves-float waves-light">Update</button>
+                        <button type="submit" id="updateProduct" class="btn btn-primary me-1 waves-effect waves-float waves-light">Update</button>
                         <button type="reset" class="btn btn-outline-secondary waves-effect" data-bs-dismiss="modal" aria-label="Close">
                             Cancle
                         </button>
@@ -280,6 +288,8 @@
         }
     });
 </script>
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
     <script>
         $(document).ready(function(){
             var row;
@@ -352,19 +362,59 @@
                         $('#is_view').val(response.data.is_view);
                         $('#status').val(response.data.status);
                         $('#feature').val(response.data.feature);
-                        $('#info_product').val(response.data.info_product);
                         $('#quantity').val(response.data.qty);
-                        $('#details').val(response.data.details);
-                        $('#description').val(response.data.description);
-                        $('#reviews').val(response.data.reviews);
-                        $('#image_product').val(response.data.image_product)
-                        // var src= $('#banner').val(response.data.banner);
-                        // $('#holderbanner').val(src);
+                        $('#image_product').val(response.data.image_product);
+                        $('#ckeditorInfoproduct').val(response.data.image_product);
+                        // CKEDITOR.instances["ckeditorInfoproduct"].text(response.data.info_product),
+                        // CKEDITOR.instances["ckeditorDetail"].text(response.data.details),
+                        // CKEDITOR.instances["ckeditorReview"].text(response.data.reviews),
+                        // CKEDITOR.instances["ckeditorDescription"].text(response.data.description)
+
                     }
                 });
+                $("#updateProduct").click(function(){
+                    var payload1 = {
+                    'name'          :   $("#name").val(),
+                    'slug'          :   $("#slug").val(),
+                    'category_id'   :   $("#category_id").val(),
+                    'code_product'  :   $("#code_product").val(),
+                    'qty'           :   $("#qty").val(),
+                    'price_root'    :   $("#price_root").val(),
+                    'price_sale'    :   $("#price_sale").val(),
+                    'color'         :   $("#color").val(),
+                    'version'       :   $("#version").val(),
+                    'is_view'       :   $("#is_view").val(),
+                    'status'        :   $("#status").val(),
+                    'feature'       :   $("#feature").val(),
+                    'image_product' :   $("#image_product").val(),
+                    'info_product'  :   CKEDITOR.instances["ckeditorInfoproduct"].getData(),
+                    'description'   :   CKEDITOR.instances["ckeditorDescription"].getData(),
+                    'details'       :   CKEDITOR.instances["ckeditorDetail"].getData(),
+                    'reviews'       :   CKEDITOR.instances["ckeditorReview"].getData(),
 
+                };
+                    $.ajax({
+                        url : '/admin/product/update/' + id,
+                        type: 'post',
+                        data: payload1,
+                        success: function($xxx){
+                            if($xxx.status == true){
+                                toastr.success("Updated product successfully!");
+                            }
+                            location.reload();
+
+                        },
+                        error: function($errors){
+                            var listErrors = $errors.responseJSON.errors;
+                            $.each(listErrors, function(key, value) {
+                                toastr.error(value[0]);
+                            });
+                        }
+
+                 });
+            });
         });
-        });
+    });
     </script>
 
 
@@ -384,10 +434,22 @@
     if ($($tr).hasClass('child')) {
         $tr = $tr.prev('.parent');
     }
+
+    var data = table.row($tr).data();
+    console.log(data);
+
+
     var src = $('#image_product').attr('src');
-
     $('#holderimage').attr('src', $tr.find('img').attr('src'));
-
+    // var id = data[5];
+    // var cke = data[14];
+    // alert(cke);
+    // $('#category_id').val(id);
+    // var info = $('#info_product')
+    // console.log(info);
+    // $('#ckeditorInfoproduct').attr('info');
+    var info = $('#ckeditorInfoproduct').val(data[14]);
+    console.log(info);
     });
     });
 </script>

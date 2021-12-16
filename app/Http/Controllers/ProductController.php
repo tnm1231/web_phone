@@ -17,10 +17,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::join('categories', 'category_id', 'categories.id')
+        $product = product::join('categories', 'category_id', 'categories.id')
                         ->select('products.*', 'categories.name as nameCate')
                         ->get();
-        return view('admin.page.product.listProduct',compact('product'));
+        $product_detail = product::all();
+        $category = category::where('is_view', 1)->get();
+        return view('admin.page.product.listProduct',compact('product','category'));
     }
 
     /**
@@ -68,7 +70,6 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = product::find($id);
-
         if($product){
             return response()->json(["data" => $product]);
         }else {
@@ -91,6 +92,7 @@ class ProductController extends Controller
         $product->update($data);
         return response()->json(['status' => true]);
     }
+
     public function changeValueView(Request $request){
         $id = $request->id;
         $product = product::find($id);

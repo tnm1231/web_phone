@@ -38,3 +38,7 @@ Route::get('/admin/product/delete/{id}', [\App\Http\Controllers\ProductControlle
 Route::post('/changeView', [\App\Http\Controllers\ProductController::class, 'changeValueView'])->name('change.View');
 Route::get('/admin/product/edit/{id}', [\App\Http\Controllers\ProductController::class, 'edit']);
 Route::post('/admin/product/update/{id}', [\App\Http\Controllers\ProductController::class, 'update']);
+
+Route::get('/admin/register', [\App\Http\Controllers\AdminController::class, 'viewRegister']);
+Route::post('/admin/register', [\App\Http\Controllers\AdminController::class, 'register'])->name('adminRegister');
+Route::get('/admin/login', [\App\Http\Controllers\AdminController::class, 'viewLogin']);
