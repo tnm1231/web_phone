@@ -237,7 +237,7 @@
                                                     <textarea name="ckeditorInfoproduct" id="ckeditorInfoproduct" cols="30" class="form-control" rows="10"></textarea>
                                                 </div>
                                                 <div class="tab-pane fade active show file-text"  id="description" role="tabpanel">
-                                                    <textarea id="ckeditorDescription" cols="30" class="form-control" rows="10">{{$product->description}}</textarea>
+                                                    <textarea id="ckeditorDescription" cols="30" class="form-control" rows="10"></textarea>
                                                 </div>
                                                 <div class="tab-pane fade" id="detail" role="tabpanel">
                                                     <textarea  id="ckeditorDetail" cols="30" class="form-control" rows="10"></textarea>
@@ -311,8 +311,6 @@
                 }
                 });
              });
-
-
             $(".view").click(function(){
             var text = $(this);
             var idX = $(this).data('id');
@@ -350,7 +348,6 @@
                     url: '/admin/product/edit/' + id,
                     type: 'get',
                     success: function(response) {
-
                         $('#name').val(response.data.name);
                         $('#slug').val(response.data.slug);
                         $('#price_root').val(response.data.price_root);
@@ -364,12 +361,10 @@
                         $('#feature').val(response.data.feature);
                         $('#quantity').val(response.data.qty);
                         $('#image_product').val(response.data.image_product);
-                        $('#ckeditorInfoproduct').val(response.data.image_product);
-                        // CKEDITOR.instances["ckeditorInfoproduct"].text(response.data.info_product),
-                        // CKEDITOR.instances["ckeditorDetail"].text(response.data.details),
-                        // CKEDITOR.instances["ckeditorReview"].text(response.data.reviews),
-                        // CKEDITOR.instances["ckeditorDescription"].text(response.data.description)
-
+                        CKEDITOR.instances['ckeditorInfoproduct'].setData(response.data.info_product);
+                        CKEDITOR.instances['ckeditorDetail'].setData(response.data.details);
+                        CKEDITOR.instances['ckeditorReview'].setData(response.data.reviews);
+                        CKEDITOR.instances['ckeditorDescription'].setData(response.data.description);
                     }
                 });
                 $("#updateProduct").click(function(){
@@ -391,7 +386,6 @@
                     'description'   :   CKEDITOR.instances["ckeditorDescription"].getData(),
                     'details'       :   CKEDITOR.instances["ckeditorDetail"].getData(),
                     'reviews'       :   CKEDITOR.instances["ckeditorReview"].getData(),
-
                 };
                     $.ajax({
                         url : '/admin/product/update/' + id,
@@ -402,7 +396,6 @@
                                 toastr.success("Updated product successfully!");
                             }
                             location.reload();
-
                         },
                         error: function($errors){
                             var listErrors = $errors.responseJSON.errors;
@@ -410,7 +403,6 @@
                                 toastr.error(value[0]);
                             });
                         }
-
                  });
             });
         });
@@ -424,32 +416,28 @@
 <script type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-
     var table = $('#datatable').DataTable();
-
     table.on('click', '.callEdit', function() {
-
-
         $tr = $(this).closest('tr');
     if ($($tr).hasClass('child')) {
         $tr = $tr.prev('.parent');
     }
-
     var data = table.row($tr).data();
     console.log(data);
-
-
     var src = $('#image_product').attr('src');
     $('#holderimage').attr('src', $tr.find('img').attr('src'));
-    // var id = data[5];
-    // var cke = data[14];
-    // alert(cke);
+    // var info = data[13];
+    var description = data[14];
     // $('#category_id').val(id);
     // var info = $('#info_product')
     // console.log(info);
     // $('#ckeditorInfoproduct').attr('info');
-    var info = $('#ckeditorInfoproduct').val(data[14]);
-    console.log(info);
+    // var info = $('#ckeditorInfoproduct').val(data[13]);
+    // var info = CKEDITOR.instances["ckeditorInfoproduct"].setData(data[13])
+//     console.log(info);
+//    $('#name').val(data[1]);
+
+    // console.log(info);
     });
     });
 </script>

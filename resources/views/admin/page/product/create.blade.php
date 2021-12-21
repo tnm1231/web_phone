@@ -68,6 +68,16 @@
                                     <option value="6">Yellow</option>
                             </select>
                         </div>
+                        {{-- <div class="col-xl-2 col-md-3 col-sm-12 mb-2">
+                            <label for="task-tag" class="form-label d-block">Color</label>
+                            <select class="form-select task-tag" id="task-tag" name="task-tag[]" multiple="multiple">
+                               @foreach ($color as $value)
+                               <option>{{$value->name}}</option>
+                               @endforeach
+                            </select>
+                        </div> --}}
+
+
                         <div class="col-xl-2 col-md-3 col-sm-12 mb-2">
                             <label class="form-label" for="basicInput">Is_view</label>
                             <select class="form-control" id="is_view" required="">
@@ -159,7 +169,6 @@
             </div>
         </div>
     </div>
-
 </section>
 @endsection
 @section('js')
@@ -189,14 +198,17 @@
                 return str;
             }
             $("#createProduct").click(function(){
+                // var product_id = $("#code_product").val();
+
+
                 var payload = {
                     'name'          :   $("#name").val(),
                     'slug'          :   $("#slug").val(),
                     'category_id'   :   $("#category_id").val(),
                     'code_product'  :   $("#code_product").val(),
-                    'qty'           :   $("#qty").val(),
+                    'qty'           :   $("#quantity").val(),
                     'price_root'    :   $("#price_root").val(),
-                    'price_sale'    :   $("#price_sale").val(),
+                    'price_sell'    :   $("#price_sale").val(),
                     'color'         :   $("#color").val(),
                     'version'       :   $("#version").val(),
                     'is_view'       :   $("#is_view").val(),
@@ -216,7 +228,7 @@
                         if($xxx.status == true){
                             toastr.success("Created product successfully!");
                         }
-                        // location.reload();
+                        location.reload();
                     },
                     error: function($errors){
                         var listErrors = $errors.responseJSON.errors;

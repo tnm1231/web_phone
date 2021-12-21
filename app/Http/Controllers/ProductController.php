@@ -20,7 +20,6 @@ class ProductController extends Controller
         $product = product::join('categories', 'category_id', 'categories.id')
                         ->select('products.*', 'categories.name as nameCate')
                         ->get();
-        $product_detail = product::all();
         $category = category::where('is_view', 1)->get();
         return view('admin.page.product.listProduct',compact('product','category'));
     }

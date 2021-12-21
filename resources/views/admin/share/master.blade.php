@@ -16,7 +16,6 @@
     @include('admin.share.header')
     <!-- END: Header-->
 
-
     <!-- BEGIN: Main Menu-->
     @include('admin.share.left-menu')
     <!-- END: Main Menu-->
@@ -32,6 +31,7 @@
 
 @include('admin.share.footer')
 @include('admin.share.foot-css')
+@include('admin.page.todolist.foot-css')
 @yield('js')
 </body>
 <!-- END: Body-->

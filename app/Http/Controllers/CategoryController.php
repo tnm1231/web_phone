@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Category\categoryRequest;
 use App\Http\Requests\Admin\Category\updateRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function viewAdmin(){
+    //     $admin = Auth::user();
+    //     dd($admin);
+    //     return view('admin.share.master', compact('admin'));
+    // }
     public function index()
     {
         $listCategory = DB::table('categories as A')
