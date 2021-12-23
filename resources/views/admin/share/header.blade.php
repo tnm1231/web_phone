@@ -42,7 +42,7 @@
                             </div>
                         </li>
                         <li class="scrollable-container media-list">
-                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="../../../app-assets/images/pages/eCommerce/1.png" alt="donuts" width="62">
+                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="/admin/app-assets/images/pages/eCommerce/1.png" alt="donuts" width="62">
                                 <div class="list-item-body flex-grow-1"><i class="ficon cart-item-remove" data-feather="x"></i>
                                     <div class="media-heading">
                                         <h6 class="cart-item-title"><a class="text-body" href="app-ecommerce-details.html"> Apple watch 5</a></h6><small class="cart-item-by">By Apple</small>
@@ -55,7 +55,7 @@
                                     <h5 class="cart-item-price">$374.90</h5>
                                 </div>
                             </div>
-                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="../../../app-assets/images/pages/eCommerce/7.png" alt="donuts" width="62">
+                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="/admin/app-assets/images/pages/eCommerce/7.png" alt="donuts" width="62">
                                 <div class="list-item-body flex-grow-1"><i class="ficon cart-item-remove" data-feather="x"></i>
                                     <div class="media-heading">
                                         <h6 class="cart-item-title"><a class="text-body" href="app-ecommerce-details.html"> Google Home Mini</a></h6><small class="cart-item-by">By Google</small>
@@ -68,7 +68,7 @@
                                     <h5 class="cart-item-price">$129.40</h5>
                                 </div>
                             </div>
-                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="../../../app-assets/images/pages/eCommerce/2.png" alt="donuts" width="62">
+                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="/admin/app-assets/images/pages/eCommerce/2.png" alt="donuts" width="62">
                                 <div class="list-item-body flex-grow-1"><i class="ficon cart-item-remove" data-feather="x"></i>
                                     <div class="media-heading">
                                         <h6 class="cart-item-title"><a class="text-body" href="app-ecommerce-details.html"> iPhone 11 Pro</a></h6><small class="cart-item-by">By Apple</small>
@@ -81,7 +81,7 @@
                                     <h5 class="cart-item-price">$699.00</h5>
                                 </div>
                             </div>
-                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="../../../app-assets/images/pages/eCommerce/3.png" alt="donuts" width="62">
+                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="/admin/app-assets/images/pages/eCommerce/3.png" alt="donuts" width="62">
                                 <div class="list-item-body flex-grow-1"><i class="ficon cart-item-remove" data-feather="x"></i>
                                     <div class="media-heading">
                                         <h6 class="cart-item-title"><a class="text-body" href="app-ecommerce-details.html"> iMac Pro</a></h6><small class="cart-item-by">By Apple</small>
@@ -94,7 +94,7 @@
                                     <h5 class="cart-item-price">$4,999.00</h5>
                                 </div>
                             </div>
-                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="../../../app-assets/images/pages/eCommerce/5.png" alt="donuts" width="62">
+                            <div class="list-item align-items-center"><img class="d-block rounded me-1" src="/admin/app-assets/images/pages/eCommerce/5.png" alt="donuts" width="62">
                                 <div class="list-item-body flex-grow-1"><i class="ficon cart-item-remove" data-feather="x"></i>
                                     <div class="media-heading">
                                         <h6 class="cart-item-title"><a class="text-body" href="app-ecommerce-details.html"> MacBook Pro</a></h6><small class="cart-item-by">By Apple</small>

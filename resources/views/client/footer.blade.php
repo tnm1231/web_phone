@@ -1,12 +1,66 @@
 <div class="footer">
     <!-- Begin Footer Static Top Area -->
     <div class="footer-static-top">
-       <div class="contact-main-page mt-40 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
-                <div class="container mb-60">
-                    <div id="google-map">
-                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3564.5212581183214!2d108.20755351465125!3d16.059941588886666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b4239d8e51%3A0x96e408c6b0419760!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBEdXkgVMOibg!5e1!3m2!1svi!2s!4v1640195307554!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
+        <div class="container">
+            <!-- Begin Footer Shipping Area -->
+            <div class="footer-shipping pt-60 pb-55 pb-xs-25">
+                <div class="row">
+                    <!-- Begin Li's Shipping Inner Box Area -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
+                        <div class="li-shipping-inner-box">
+                            <div class="shipping-icon">
+                                <img src="/client/images/shipping-icon/1.png" alt="Shipping Icon">
+                            </div>
+                            <div class="shipping-text">
+                                <h2>Free Delivery</h2>
+                                <p>And free returns. See checkout for delivery dates.</p>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Li's Shipping Inner Box Area End Here -->
+                    <!-- Begin Li's Shipping Inner Box Area -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
+                        <div class="li-shipping-inner-box">
+                            <div class="shipping-icon">
+                                <img src="/client/images/shipping-icon/2.png" alt="Shipping Icon">
+                            </div>
+                            <div class="shipping-text">
+                                <h2>Safe Payment</h2>
+                                <p>Pay with the world's most popular and secure payment methods.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Li's Shipping Inner Box Area End Here -->
+                    <!-- Begin Li's Shipping Inner Box Area -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
+                        <div class="li-shipping-inner-box">
+                            <div class="shipping-icon">
+                                <img src="/client/images/shipping-icon/3.png" alt="Shipping Icon">
+                            </div>
+                            <div class="shipping-text">
+                                <h2>Shop with Confidence</h2>
+                                <p>Our Buyer Protection covers your purchasefrom click to delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Li's Shipping Inner Box Area End Here -->
+                    <!-- Begin Li's Shipping Inner Box Area -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
+                        <div class="li-shipping-inner-box">
+                            <div class="shipping-icon">
+                                <img src="/client/images/shipping-icon/4.png" alt="Shipping Icon">
+                            </div>
+                            <div class="shipping-text">
+                                <h2>24/7 Help Center</h2>
+                                <p>Have a question? Call a Specialist or chat online.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Li's Shipping Inner Box Area End Here -->
                 </div>
+            </div>
+            <!-- Footer Shipping Area End Here -->
+        </div>
     </div>
     <!-- Footer Static Top Area End Here -->
     <!-- Begin Footer Static Middle Area -->
@@ -17,7 +71,7 @@
                     <!-- Begin Footer Logo Area -->
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-logo">
-                            <img src="images/menu/logo/1.jpg" alt="Footer Logo">
+                            <img src="/client/images/menu/logo/1.jpg" alt="Footer Logo">
                             <p class="info">
                                 We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
                             </p>
@@ -154,7 +208,7 @@
                     <!-- Begin Footer Payment Area -->
                     <div class="copyright text-center">
                         <a href="#">
-                            <img src="images/payment/1.png" alt="">
+                            <img src="/client/images/payment/1.png" alt="">
                         </a>
                     </div>
                     <!-- Footer Payment Area End Here -->
