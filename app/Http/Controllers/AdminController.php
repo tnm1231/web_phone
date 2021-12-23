@@ -32,7 +32,7 @@ class AdminController extends Controller
         $dataMail['fullname'] = $request->fullname;
         Mail::to($request->email)->send(new registerMail($dataMail));
 
-        return redirect('/admin/verify');
+        return redirect('/');
 
 
 

@@ -31,7 +31,6 @@
 
 @include('admin.share.footer')
 @include('admin.share.foot-css')
-@include('admin.page.todolist.foot-css')
 @yield('js')
 </body>
 <!-- END: Body-->

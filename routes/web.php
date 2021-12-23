@@ -42,7 +42,6 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::post('/create', [\App\Http\Controllers\ProductController::class, 'store']);
         Route::get('/index', [\App\Http\Controllers\ProductController::class, 'index']);
         Route::get('/delete/{id}', [\App\Http\Controllers\ProductController::class, 'destroy']);
-        Route::get('/delete/{id}', [\App\Http\Controllers\ProductController::class, 'destroy']);
         Route::post('/changeView', [\App\Http\Controllers\ProductController::class, 'changeValueView'])->name('change.View');
         Route::get('/edit/{id}', [\App\Http\Controllers\ProductController::class, 'edit']);
         Route::post('/update/{id}', [\App\Http\Controllers\ProductController::class, 'update']);
@@ -62,5 +61,11 @@ Route::get('/admin/verify', [\App\Http\Controllers\AdminController::class, 'veri
 
 Route::get('/admin/manage', [\App\Http\Controllers\ManageController::class, 'index']);
 Route::post('/admin/manage/create', [\App\Http\Controllers\ManageController::class, 'store']);
+
+
+    Route::get('/client/index', [\App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/client/error', [\App\Http\Controllers\HomeController::class, 'error']);
+    Route::get('/client/profile', [\App\Http\Controllers\HomeController::class, 'profile']);
+    Route::get('/client/detail', [\App\Http\Controllers\HomeController::class, 'detail']);
 
 

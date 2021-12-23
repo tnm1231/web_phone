@@ -300,12 +300,12 @@
                 $("#product_id").val(id);
             });
             $("#delete").click(function(){
-                var id = $("#product").val();
+                var id = $("#product_id").val();
                 $.ajax({
             url: '/admin/product/delete/' + id,
             type: 'get',
             success: function($data) {
-                toastr.success('Delete one category successfully!', 'Success');
+                toastr.success('Deleted product successfully!', 'Success');
                 $(row).closest('tr').remove();
                 $('#addNewCard').modal('hide');
                 }
