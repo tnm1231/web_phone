@@ -11,6 +11,7 @@ use App\Mail\registerMail;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\sendMailJob;
 
 class AdminController extends Controller
 {
@@ -30,8 +31,8 @@ class AdminController extends Controller
         toastr()->success('Your admin account has been created successfully!');
 
         $dataMail['fullname'] = $request->fullname;
-        Mail::to($request->email)->send(new registerMail($dataMail));
-
+        // Mail::to($request->email)->send(new registerMail($dataMail));
+        sendMailJob::dispatch($request->email, $dataMail);
         return redirect('/');
 
 

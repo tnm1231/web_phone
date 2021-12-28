@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Creat Category</h4>
+                    <h4 class="card-title">Create Category</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -21,16 +21,16 @@
                                 <input type="text" id="slug" class="form-control" required>
                             </div>
                         </div>
-                        <div class="form-group col-xl-4 col-md-6 col-12">
-                        <label class="form-label" for="basicInput">Parent_id</label>
+                        {{-- <div class="form-group col-xl-4 col-md-6 col-12">
+                        <label class="form-label" type="hidden" for="basicInput">Parent_id</label>
                         <select class="form-control" id="parent_id" required="">
                                 <option value=0> Root </option>
                                 @foreach ($category as $value)
                                 <option value={{$value->id}}> {{$value->name}} </option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="form-group col-xl-6 col-md-6 col-12">
+                        </div> --}}
+                        <div class="form-group col-xl-4 col-md-6 col-12">
                         <label class="form-label" for="basicInput">Is_view</label>
                             <select class="form-control" id="is_view" required="">
                                 <option value="">Choose...</option>

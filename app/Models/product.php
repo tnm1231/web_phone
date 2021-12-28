@@ -16,6 +16,7 @@ class product extends Model
         'price_sell',
         'code_product',
         'category_id',
+        'brand_id',
         'rating',
         'color',
         'version',
@@ -29,4 +30,10 @@ class product extends Model
         'details',
         'reviews',
     ];
+
+public function brand()
+    {
+        return $this->belongsTo('App\Models\Brand', 'brand_id', 'id');
+    }
+
 }

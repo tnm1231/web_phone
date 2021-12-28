@@ -18,4 +18,10 @@ class HomeController extends Controller
     public function detail(){
         return view('client.detail');
     }
+    public function cate(){
+        return view('client.cate');
+    }
+    public function checkout(){
+        return view('client.checkout');
+    }
 }

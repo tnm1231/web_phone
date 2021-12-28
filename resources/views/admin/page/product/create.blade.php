@@ -9,19 +9,28 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+                        <div class="col-xl-3 col-md-4 col-sm-12 mb-2">
                             <label class="form-label">Name</label>
                             <input type="text" class="form-control credit-card-mask" placeholder="" id="name">
                         </div>
-                        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+                        <div class="col-xl-3 col-md-4 col-sm-12 mb-2">
                             <label class="form-label">Slug</label>
                             <input type="text" class="form-control credit-card-mask" placeholder="" id="slug">
                         </div>
-                        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+                        <div class="col-xl-3 col-md-4 col-sm-12 mb-2">
                             <label class="form-label" for="basicInput">Category_Id</label>
                         <select class="form-control" id="category_id" required="">
                             <option value=0> Root </option>
                             @foreach ($category as $value)
+                            <option value={{$value->id}}> {{$value->name}} </option>
+                            @endforeach
+                        </select>
+                        </div>
+                        <div class="col-xl-3 col-md-4 col-sm-12 mb-2">
+                            <label class="form-label" for="basicInput">Brand_Id</label>
+                        <select class="form-control" id="brand_id" required="">
+                            <option value=0> Root </option>
+                            @foreach ($brand as $value)
                             <option value={{$value->id}}> {{$value->name}} </option>
                             @endforeach
                         </select>
@@ -205,6 +214,7 @@
                     'name'          :   $("#name").val(),
                     'slug'          :   $("#slug").val(),
                     'category_id'   :   $("#category_id").val(),
+                    'brand_id'      :   $("#brand_id"   ).val(),
                     'code_product'  :   $("#code_product").val(),
                     'qty'           :   $("#quantity").val(),
                     'price_root'    :   $("#price_root").val(),

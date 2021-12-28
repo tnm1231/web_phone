@@ -41,7 +41,7 @@
                                     <ul class="nav li-product-menu">
                                        <li><a class="active" data-toggle="tab" href="#li-info"><span><i class="fa fa-address-card"></i> About</span></a></li>
                                        <li><a data-toggle="tab" href="#li-purchased-product"><span><i class="fa fa-shopping-cart"></i> Purchased products</span></a></li>
-                                       <li><a data-toggle="tab" href="#li-delivering"><span><i class="fa fa-truck"></i> Delivering</span></a></li>
+                                       <li><a data-toggle="tab" href="#li-delivering"><span><i class="fa fa-truck"></i> Your Order</span></a></li>
                                     </ul>
                                 </div>
                                 <!-- Begin Li's Tab Menu Content Area -->
@@ -66,7 +66,7 @@
                                 </div>
                                 <br>
                                     <button type="submit" id="updateCategory"
-                                        class="btn btn-success me-1 waves-effect waves-float waves-light">Setting</button>
+                                        class="btn btn-warning me-1 waves-effect waves-float waves-light">Setting</button>
                             </div>
 
                             <div id="li-purchased-product" class="tab-pane" role="tabpanel">
@@ -111,13 +111,14 @@
                                 <div class="row">
                                     <div class="col-12">
                                             <div class="table-content table-responsive">
+                                                <br>
+                                                    <h6>Waiting for submission</h6>
                                                 <table class="table">
                                                     <tbody>
                                                         <tr>
-                                                            <br>
-                                                            <br>
+                                                           <br>
                                                             <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                            <td class="li-product-thumbnail"><a href="#"><img style="width:60px;height:60px" src="images/product/small-size/5.jpg" alt="Li's Product Image"></a></td>
+                                                            <td class="li-product-thumbnail"><a href="#"><img style="width:40px;height:40px" src="images/product/small-size/5.jpg" alt="Li's Product Image"></a></td>
                                                             <td class="li-product-name"><a href="#">Accusantium dolorem1</a></td>
                                                             <td class="li-product-price"><span class="amount">$46.80</span></td>
                                                             <td class="quantity"><span class="amount">x1</span></td>
@@ -126,7 +127,31 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                            <td class="li-product-thumbnail"><a href="#"><img style="width:60px;height:60px" src="images/product/small-size/6.jpg" alt="Li's Product Image"></a></td>
+                                                            <td class="li-product-thumbnail"><a href="#"><img style="width:40px;height:40px" src="images/product/small-size/6.jpg" alt="Li's Product Image"></a></td>
+                                                            <td class="li-product-name"><a href="#">Mug Today is a good day</a></td>
+                                                            <td class="li-product-price"><span class="amount">$71.80</span></td>
+                                                            <td class="quantity"><span class="amount">x2</span></td>
+                                                            <td class="li-product-price"><span class="amount">Total: $143.60</span></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <br>
+                                                <h6>Delivering</h6>
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
+                                                            <td class="li-product-thumbnail"><a href="#"><img style="width:30px;height:30px" src="images/product/small-size/5.jpg" alt="Li's Product Image"></a></td>
+                                                            <td class="li-product-name"><a href="#">Accusantium dolorem1</a></td>
+                                                            <td class="li-product-price"><span class="amount">$46.80</span></td>
+                                                            <td class="quantity"><span class="amount">x1</span></td>
+                                                            <td class="li-product-price"><span class="amount">Total: $46.80</span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
+                                                            <td class="li-product-thumbnail"><a href="#"><img style="width:40px;height:40px" src="images/product/small-size/6.jpg" alt="Li's Product Image"></a></td>
                                                             <td class="li-product-name"><a href="#">Mug Today is a good day</a></td>
                                                             <td class="li-product-price"><span class="amount">$71.80</span></td>
                                                             <td class="quantity"><span class="amount">x2</span></td>

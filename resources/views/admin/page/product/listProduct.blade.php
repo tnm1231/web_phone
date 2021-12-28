@@ -16,6 +16,7 @@
                             <th>Price_sale</th>
                             <th>Code_product</th>
                             <th>Category_id</th>
+                            <th>Brand_id</th>
                             <th>Color</th>
                             <th>Version</th>
                             <th>Is_view</th>
@@ -46,6 +47,7 @@
                             <td>{{ number_format($value->price_sell, 0, ',', '.') }}</td>
                             <td>{{$value->code_product}}</td>
                             <td>{{$value->nameCate}}</td>
+                            <td>{{$value->brand->name}}</td>
                             {{-- <td {{$value->color}}> {{ $color[ $value->color ] }}</td> --}}
                             <td>
                                 <a href="app-user-list.html" class="me-50">
@@ -133,8 +135,18 @@
                                             <label class="form-label" for="basicInput">Category_Id</label>
                                         <select class="form-control" id="category_id" name="category_id">
                                             {{-- <input type="text" id="nameCate" value={{$value->nameCate}}> --}}
-                                            <option value="0"> Root </option>
+                                            {{-- <option value="0"> Root </option> --}}
                                             @foreach ($category as $value)
+                                            <option value={{$value->id}}> {{$value->name}} </option>
+                                            @endforeach
+                                        </select>
+                                        </div>
+                                        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+                                            <label class="form-label" for="basicInput">Brand_id</label>
+                                        <select class="form-control" id="brand_id" name="brand_id">
+                                            {{-- <input type="text" id="nameCate" value={{$value->nameCate}}> --}}
+                                            {{-- <option value="0"> Root </option> --}}
+                                            @foreach ($brand as $value)
                                             <option value={{$value->id}}> {{$value->name}} </option>
                                             @endforeach
                                         </select>
@@ -179,6 +191,8 @@
                                                     <option value="4">Black</option>
                                                     <option value="5">Green</option>
                                                     <option value="6">Yellow</option>
+                                                    <option value="7">Pink</option>
+
                                             </select>
                                         </div>
                                         <div class="col-xl-2 col-md-3 col-sm-12 mb-2">
@@ -354,6 +368,7 @@
                         $('#price_sale').val(response.data.price_sell);
                         $('#code_product').val(response.data.code_product);
                         $('#category_id').val(response.data.category_id);
+                        $('#brand_id').val(response.data.brand_id);
                         $('#color').val(response.data.color);
                         $('#version').val(response.data.version);
                         $('#is_view').val(response.data.is_view);
@@ -372,6 +387,7 @@
                     'name'          :   $("#name").val(),
                     'slug'          :   $("#slug").val(),
                     'category_id'   :   $("#category_id").val(),
+                    'brand_id'      :   $("#brand_id").val(),
                     'code_product'  :   $("#code_product").val(),
                     'qty'           :   $("#qty").val(),
                     'price_root'    :   $("#price_root").val(),
@@ -423,21 +439,10 @@
         $tr = $tr.prev('.parent');
     }
     var data = table.row($tr).data();
-    console.log(data);
+    // console.log(data);
     var src = $('#image_product').attr('src');
     $('#holderimage').attr('src', $tr.find('img').attr('src'));
-    // var info = data[13];
-    var description = data[14];
-    // $('#category_id').val(id);
-    // var info = $('#info_product')
-    // console.log(info);
-    // $('#ckeditorInfoproduct').attr('info');
-    // var info = $('#ckeditorInfoproduct').val(data[13]);
-    // var info = CKEDITOR.instances["ckeditorInfoproduct"].setData(data[13])
-//     console.log(info);
-//    $('#name').val(data[1]);
 
-    // console.log(info);
     });
     });
 </script>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Product\createRequest;
 use App\Http\Requests\Admin\Product\updateRequest;
 use App\Models\category;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
@@ -21,7 +22,8 @@ class ProductController extends Controller
                         ->select('products.*', 'categories.name as nameCate')
                         ->get();
         $category = category::where('is_view', 1)->get();
-        return view('admin.page.product.listProduct',compact('product','category'));
+        $brand = Brand::where('is_view', 1)->get();
+        return view('admin.page.product.listProduct',compact('product','category','brand'));
     }
 
     /**
@@ -32,7 +34,8 @@ class ProductController extends Controller
     public function create()
     {
         $category = category::where('is_view', 1)->get();
-        return view('admin.page.product.create',compact('category'));
+        $brand = Brand::where('is_view', 1)->get();
+        return view('admin.page.product.create',compact('category','brand'));
     }
 
     /**

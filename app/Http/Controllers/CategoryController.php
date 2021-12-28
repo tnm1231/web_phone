@@ -6,6 +6,7 @@ use App\Models\category;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Category\categoryRequest;
 use App\Http\Requests\Admin\Category\updateRequest;
+use App\Models\product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +17,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function viewAdmin(){
-    //     $admin = Auth::user();
-    //     dd($admin);
-    //     return view('admin.share.master', compact('admin'));
-    // }
+
     public function index()
     {
         $listCategory = DB::table('categories as A')
@@ -30,7 +27,6 @@ class CategoryController extends Controller
         $category = category::where('parent_id', 0)->get();
 
         return view('admin.page.categories.listCategory', compact('listCategory','category'));
-
 
 
 
@@ -44,7 +40,7 @@ class CategoryController extends Controller
     public function create()
     {
         $category = category::where('parent_id', 0)->get();
-        return view('admin.page.categories.create',compact('category'));
+        return view('admin.page.categories.create');
     }
 
     /**
@@ -147,7 +143,7 @@ class CategoryController extends Controller
         $category = category::find($id);
         if($category) {
             $category->delete();
-            $listCate = category::where('parent_id', $id)->get();
+            $listCate = product::where('category_id', $id)->get();
             foreach ($listCate as $key => $value){
                 $value->delete();
             }
