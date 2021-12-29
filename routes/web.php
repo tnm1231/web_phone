@@ -57,8 +57,22 @@ Route::group(['prefix' => '/admin' ], function(){
 
     });
     Route::group(['prefix' => '/banner' ], function(){
-        Route::get('/create', [\App\Http\Controllers\BannerController::class, 'create']);
-        Route::post('/create', [\App\Http\Controllers\BannerController::class, 'store']);
+        // Route::get('/create', [\App\Http\Controllers\BannerController::class, 'create']);
+        // Route::post('/create', [\App\Http\Controllers\BannerController::class, 'store']);
+        // Route::post('/create', [\App\Http\Controllers\BannerController::class, 'store']);
+
+        Route::get('/create', [\App\Http\Controllers\MainBannerController::class, 'create']);
+        Route::post('/createMain', [\App\Http\Controllers\MainBannerController::class, 'storeMain']);
+        Route::post('/createSub', [\App\Http\Controllers\MainBannerController::class, 'storeSub']);
+        Route::post('/update_isview', [\App\Http\Controllers\MainBannerController::class, 'updateIsview'])->name('updateIsView');
+        Route::get('/delete/{id}', [\App\Http\Controllers\MainBannerController::class, 'destroy']);
+        Route::get('/edit/{id}', [\App\Http\Controllers\MainBannerController::class, 'edit']);
+
+
+
+        Route::get('/index', [\App\Http\Controllers\MainBannerController::class, 'index']);
+
+
 
     });
     Route::get('/profile', [\App\Http\Controllers\InfoAdminController::class, 'index']);

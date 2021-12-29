@@ -14,7 +14,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        //
+        $listBanner = Banner::all();
+        return view('admin.page.banner.listBanner',compact('listBanner'));
     }
 
     /**

@@ -57,8 +57,8 @@
 
                             <td value="{{$value->version}}"> {{ $version[ $value->version ] }}</td>
                             <td>
-                                <span class="btn view {{$value->is_view == 1 ? 'btn-outline-success' : ' btn-outline-danger'}} round waves-effect" data-id="{{$value->id}}">{{ $value->is_view == 1 ? 'Visible' : 'Disable' }} </span>                            </div>
-                        </td>
+                                <span class="btn view {{$value->is_view == 1 ? 'btn-outline-success' : ' btn-outline-danger'}} round waves-effect" data-id="{{$value->id}}">{{ $value->is_view == 1 ? 'Visible' : 'Disable' }} </span>
+                            </td>
                             <td value={{$value->status}}> {{$status[ $value->status ]}}</td>
                             <td>{{ ($value->feature) ? 'New Arrival' : 'Bestseller' }}</td>
                             <td>{{$value->qty}}</td>
