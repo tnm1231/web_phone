@@ -64,9 +64,17 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::get('/create', [\App\Http\Controllers\MainBannerController::class, 'create']);
         Route::post('/createMain', [\App\Http\Controllers\MainBannerController::class, 'storeMain']);
         Route::post('/createSub', [\App\Http\Controllers\MainBannerController::class, 'storeSub']);
+
         Route::post('/update_isview', [\App\Http\Controllers\MainBannerController::class, 'updateIsview'])->name('updateIsView');
+        Route::post('/update_isview1', [\App\Http\Controllers\MainBannerController::class, 'updateIsview1'])->name('updateIsView1');
+        Route::post('/update_isview2', [\App\Http\Controllers\MainBannerController::class, 'updateIsview2'])->name('updateIsView2');
+        Route::post('/update_isview3', [\App\Http\Controllers\MainBannerController::class, 'updateIsview3'])->name('updateIsView3');
+
         Route::get('/delete/{id}', [\App\Http\Controllers\MainBannerController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\MainBannerController::class, 'edit']);
+        Route::post('/update/{id}', [\App\Http\Controllers\MainBannerController::class, 'update']);
+
+        Route::get('/editSub/{id}', [\App\Http\Controllers\MainBannerController::class, 'editSub']);
 
 
 
