@@ -1,7 +1,7 @@
 @extends('admin.share.master')
 @section('content')
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table  id="datatable" class="table table-bordered">
         <thead >
             <tr>
                 <th class="text-center">Small Banner 1</th>
@@ -16,17 +16,17 @@
         <tbody>
             @foreach ($listSub as $key => $value )
             <tr class="text-center">
-                <td><img style="width:100px; height:100px" src="{{$value->small_banner_1}}"></td>
+                <td class="small1"><img style="width:100px; height:100px" src="{{$value->small_banner_1}}"></td>
 
                 <td>
                     <span class="btn view1 {{$value->is_view_1 == 1 ? 'btn-outline-success' : ' btn-outline-danger'}} round waves-effect" data-view1="{{$value->id}}">{{ $value->is_view == 1 ? 'Visible' : 'Disable' }} </span>
                 </td>
-                <td><img style="width:100px; height:100px" src="{{$value->small_banner_2}}"></td>
+                <td class="small2"><img style="width:100px; height:100px" src="{{$value->small_banner_2}}"></td>
 
                 <td>
                     <span class="btn view2 {{$value->is_view_2 == 1 ? 'btn-outline-success' : ' btn-outline-danger'}} round waves-effect" data-view2="{{$value->id}}">{{ $value->is_view == 1 ? 'Visible' : 'Disable' }} </span>
                 </td>
-                <td><img style="width:100px; height:100px" src="{{$value->sub_banner}}"></td>
+                <td class="sub"><img style="width:100px; height:100px" src="{{$value->sub_banner}}"></td>
 
                 <td>
                     <span class="btn view3 {{$value->is_view_sub == 1 ? 'btn-outline-success' : ' btn-outline-danger'}} round waves-effect" data-view3="{{$value->id}}">{{ $value->is_view == 1 ? 'Visible' : 'Disable' }} </span>
@@ -44,7 +44,7 @@
     </table>
 </div>
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table  id="datatable2" class="table table-bordered">
         <thead class="table-dark">
             <tr>
                 <th>STT</th>
@@ -61,7 +61,7 @@
             @foreach ($listMain as $key => $value )
             <tr class="text-center">
                 <td>{{$key+1}}</td>
-                <td><img id="banner" style="width:100px; height:100px" src="{{$value->main_banner_1}}"></td>
+                <td class="main"><img id="banneredit" src="{{$value->main_banner_1}}" style="width:100px; height:100px" ></td>
                 <td> {{$value->name_product}}</td>
                 <td> {{$value->start_price}}</td>
                 <td> {{$value->sale_offer}}</td>
@@ -132,7 +132,7 @@
                                                         <input id="banner" name="banner" placeholder="Example image below 770x475px"  class="form-control" >
                                                         <a data-input="banner" data-preview="holderbanner" class="lfm btn btn-light"> Choose </a>
                                                     </div>
-                                                    <img id="holderbanner" class="card-img-top" style="width:340px; height:175px; margin-top:30px">
+                                                    <img id="holderbanner" class="card-img-top">
                                                     </div>
                                                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                                     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
@@ -208,34 +208,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-xl-6 col-md-6 col-12">
-                                        <label class="form-label" for="basicInput">Is_view_1</label>
-                                    <select class="form-control" id="is_view_1" required="">
-                                        <option value="">Choose...</option>
-                                        <option value=1>Visible</option>
-                                        <option value=0>Disable</option>
-                                    </select>
-                                    </div>
-                                    <div class="form-group col-xl-6 col-md-6 col-12">
-                                        <label class="form-label" for="basicInput">Is_view_2</label>
-                                    <select class="form-control" id="is_view_2" required="">
-                                        <option value="">Choose...</option>
-                                        <option value=1>Visible</option>
-                                        <option value=0>Disable</option>
-                                    </select>
-                                    </div>
+
                                     <div class="form-group col-xl-6 col-md-6 col-12">
                                         <div class="row">
                                             <div class="col-md-12">
                                             <label class="form-label" for="basicInput">Small Banner 1</label>
                                             <div class="input-group">
                                                 <input id="smallBanner" name="smallBanner" class="form-control" required="">
-                                                <a data-input="smallBanner" data-preview="holder-small1" class="lfm btn btn-light waves-effect waves-float waves-light"> Choose </a>
+                                                <a data-input="smallBanner" data-preview="holdersmall1" class="lfm btn btn-light waves-effect waves-float waves-light"> Choose </a>
                                             </div>
-                                            <img id="holder-small1" class="card-img-top" style="width:300px; height:150px; margin-top:30px">
+                                            <img id="holdersmall1" class="card-img-top" style="width:300px; height:150px; margin-top:30px">
                                             </div>
                                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                             <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
@@ -250,9 +234,9 @@
                                         <label class="form-label" for="basicInput">Small Banner 2</label>
                                         <div class="input-group">
                                             <input id="smallBanner2" name="smallBanner2" class="form-control" required="">
-                                            <a data-input="smallBanner2" data-preview="holder-banner2" class="lfm btn btn-light waves-effect waves-float waves-light"> Choose </a>
+                                            <a data-input="smallBanner2" data-preview="holdersmall2" class="lfm btn btn-light waves-effect waves-float waves-light"> Choose </a>
                                         </div>
-                                        <img id="holder-banner2" class="card-img-top" style="width:300px; height:150px; margin-top:30px">
+                                        <img id="holdersmall2" class="card-img-top" style="width:300px; height:150px; margin-top:30px">
                                         </div>
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                         <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
@@ -268,9 +252,9 @@
                                             <label class="form-label" for="basicInput">Sub Banner</label>
                                             <div class="input-group">
                                                 <input id="subBanner" name="subBanner" class="form-control" required="">
-                                                <a data-input="subBanner" data-preview="holder-sub" class="lfm btn btn-light waves-effect waves-float waves-light"> Choose </a>
+                                                <a data-input="subBanner" data-preview="holdersub" class="lfm btn btn-light waves-effect waves-float waves-light"> Choose </a>
                                             </div>
-                                            <img id="holder-sub" class="card-img-top" style="width:600px; height:200px; margin-top:30px">
+                                            <img id="holdersub" class="card-img-top" style="width:600px; height:200px; margin-top:30px">
                                             </div>
                                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                             <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
@@ -279,18 +263,10 @@
                                             </script>
                                         </div>
                                     </div>
-                                    <div class="form-group col-xl-5 col-md-6 col-12">
-                                        <label class="form-label" for="basicInput">Is_view_3</label>
-                                    <select class="form-control" id="is_view_3" required="">
-                                        <option value="">Choose...</option>
-                                        <option value=1>Visible</option>
-                                        <option value=0>Disable</option>
-                                    </select>
-                                    </div>
 
                                         <div class="row" style="margin-top: 20px;">
                                         <div class="col-4">
-                                        <button type="button" id="createSub" class="btn btn-outline-success round waves-effect">Button</button>
+                                        <button type="button" id="bannersubupdate" class="btn btn-outline-success round waves-effect">Button</button>
                                         </div>
                                     </div>
                                 </div>
@@ -315,35 +291,34 @@
 </script>
 <script>
 $(document).ready(function() {
-
-    $(".view").click(function(){
-            var text = $(this);
-            var idX = $(this).data('id');
-            var dongGoi = {
-                'id'    : idX,
-            };
-            $.ajax({
-                url : '{{ Route('updateIsView') }}',
-                type: 'post',
-                data: dongGoi,
-                success:function($data){
-                    if($data.status == false){
-                        toastr.error('Please do not intervene the system!');
-                    } else {
-                        toastr.success('Changed view successfully!');
-                        if($data.is_view == 1){
-                            text.removeClass("btn-outline-danger");
-                            text.addClass("btn-outline-success");
-                            text.html('Visible');
+        $(".view").click(function(){
+                var text = $(this);
+                var idX = $(this).data('id');
+                var dongGoi = {
+                    'id'    : idX,
+                };
+                $.ajax({
+                    url : '{{ Route('updateIsView') }}',
+                    type: 'post',
+                    data: dongGoi,
+                    success:function($data){
+                        if($data.status == false){
+                            toastr.error('Please do not intervene the system!');
                         } else {
-                            text.removeClass("btn-outline-success");
-                            text.addClass("btn-outline-danger");
-                            text.html('Disable');
+                            toastr.success('Changed view successfully!');
+                            if($data.is_view == 1){
+                                text.removeClass("btn-outline-danger");
+                                text.addClass("btn-outline-success");
+                                text.html('Visible');
+                            } else {
+                                text.removeClass("btn-outline-success");
+                                text.addClass("btn-outline-danger");
+                                text.html('Disable');
+                            }
                         }
-                    }
-                },
-            });
-    });
+                    },
+                });
+        });
         $(".view1").click(function(){
             var text = $(this);
             var idX = $(this).data('view1');
@@ -372,7 +347,6 @@ $(document).ready(function() {
                 },
             });
         });
-
         $(".view2").click(function(){
             var text = $(this);
             var idX = $(this).data('view2');
@@ -401,7 +375,6 @@ $(document).ready(function() {
                 },
             });
         });
-
         $(".view3").click(function(){
             var text = $(this);
             var idX = $(this).data('view3');
@@ -430,125 +403,109 @@ $(document).ready(function() {
                 },
             });
         });
-
-    var row ;
-    $(".callModal").click(function() {
-        var id = $(this).data('banner');
-        console.log(id);
-        row = $(this);
-        $("#banner_id").val(id);
-    });
-    $("#delete_banner").click(function(){
-        var id = $("#banner_id").val();
-
-        $.ajax({
-            url: '/admin/banner/delete/' + id,
-            type: 'get',
-            success: function($data) {
-                toastr.success('Deleted banner successfully!', 'Success');
-                $(row).closest('tr').remove();
-                $('#addNewCard').modal('hide');
-            }
+        var row ;
+        $(".callModal").click(function() {
+            var id = $(this).data('banner');
+            console.log(id);
+            row = $(this);
+            $("#banner_id").val(id);
         });
-    });
-    $(".callEdit").click(function(e){
-                var id = $(this).data('edit');
-                $("#banner_edit").val(id);
-                e.preventDefault();
-                $.ajax({
-                    url: '/admin/banner/edit/' + id,
-                    type: 'get',
-                    success: function(response) {
-
-                        $('#name').val(response.data.name_product);
-                        $('#price').val(response.data.start_price);
-                        $('#sale').val(response.data.sale_offer);
-                        $('#banner').val(response.data.main_banner_1);
-                        $('#is_view').val(response.data.is_view);
-
-                    }
-                });
-
-
-                $("#updateBanner").click(function(){
-                    var payload1 = {
-                    'name_product'              :   $('#name').val(),
-                    'start_price'               :   $("#price").val(),
-                    'sale_offer'                :    $('#sale').val(),
-                    'main_banner_1'             :   $("#banner").val(),
-                    'is_view'                   :    $('#is_view').val(),
-                };
-                    $.ajax({
-                        url : '/admin/banner/update/' + id,
-                        type: 'post',
-                        data: payload1,
-                        success: function($xxx){
-                            if($xxx.status == true){
-                                toastr.success("Product create successfully!");
-                            }
-                            location.reload();
-
-                        },
-                        error: function($errors){
-                            var listErrors = $errors.responseJSON.errors;
-                            $.each(listErrors, function(key, value) {
-                                toastr.error(value[0]);
-                            });
-                        }
-                    });
+        $("#delete_banner").click(function(){
+            var id = $("#banner_id").val();
+            $.ajax({
+                url: '/admin/banner/delete/' + id,
+                type: 'get',
+                success: function($data) {
+                    toastr.success('Deleted banner successfully!', 'Success');
+                    $(row).closest('tr').remove();
+                    $('#addNewCard').modal('hide');
+                }
             });
         });
-    });
-    $(".callSub").click(function(e){
-                var id = $(this).data('sub');
-                $("#sub_edit").val(id);
-                e.preventDefault();
-                $.ajax({
-                    url: '/admin/banner/editSub/' + id,
-                    type: 'get',
-                    success: function(response) {
-
-                        $('#is_view_1').val(response.data.is_view_1);
-                        $('#is_view_2').val(response.data.is_view_2);
-                        $('#is_view_3').val(response.data.is_view_sub);
-                        $('#smallBanner').val(response.data.small_banner_1);
-                        $('#smallBanner2').val(response.data.small_banner_2);
-                        $('#subBanner').val(response.data.sub_banner);
-
-                    }
-                });
-
-
-                $("#updateBanner").click(function(){
-                    var payload1 = {
-                    'name_product'              :   $('#name').val(),
-                    'start_price'               :   $("#price").val(),
-                    'sale_offer'                :    $('#sale').val(),
-                    'main_banner_1'             :   $("#banner").val(),
-                    'is_view'                   :    $('#is_view').val(),
-                };
+        $(".callEdit").click(function(e){
+                    var id = $(this).data('edit');
+                    $("#banner_edit").val(id);
+                    e.preventDefault();
                     $.ajax({
-                        url : '/admin/banner/update/' + id,
-                        type: 'post',
-                        data: payload1,
-                        success: function($xxx){
-                            if($xxx.status == true){
-                                toastr.success("Product create successfully!");
-                            }
-                            location.reload();
-
-                        },
-                        error: function($errors){
-                            var listErrors = $errors.responseJSON.errors;
-                            $.each(listErrors, function(key, value) {
-                                toastr.error(value[0]);
-                            });
+                        url: '/admin/banner/edit/' + id,
+                        type: 'get',
+                        success: function(response) {
+                            $('#name').val(response.data.name_product);
+                            $('#price').val(response.data.start_price);
+                            $('#sale').val(response.data.sale_offer);
+                            $('#banner').val(response.data.main_banner_1);
+                            $('#is_view').val(response.data.is_view);
                         }
                     });
+                    $("#updateBanner").click(function(){
+                        var payload1 = {
+                        'name_product'              :   $('#name').val(),
+                        'start_price'               :   $('#price').val(),
+                        'sale_offer'                :    $('#sale').val(),
+                        'main_banner_1'             :   $('#banner').val(),
+                        'is_view'                   :    $('#is_view').val(),
+                    };
+                        $.ajax({
+                            url : '/admin/banner/update/' + id,
+                            type: 'post',
+                            data: payload1,
+                            success: function($xxx){
+                                if($xxx.status == true){
+                                    toastr.success("Product create successfully!");
+                                }
+                                location.reload();
+                            },
+                            error: function($errors){
+                                var listErrors = $errors.responseJSON.errors;
+                                $.each(listErrors, function(key, value) {
+                                    toastr.error(value[0]);
+                                });
+                            }
+                        });
+                    });
             });
+
+        $(".callSub").click(function(e){
+                    var id = $(this).data('sub');
+                    $("#sub_edit").val(id);
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/admin/banner/editSub/' + id,
+                        type: 'get',
+                        success: function(response) {
+                            $('#smallBanner').val(response.data.small_banner_1);
+                            $('#smallBanner2').val(response.data.small_banner_2);
+                            $('#subBanner').val(response.data.sub_banner);
+                            }
+                        });
+                    $("#bannersubupdate").click(function(){
+                        var payload1 = {
+                        'small_banner_1'              :   $('#smallBanner').val(),
+                        'small_banner_2'               :   $('#smallBanner2').val(),
+                        'sub_banner'                :    $('#subBanner').val(),
+                    };
+                        $.ajax({
+                            url : '/admin/banner/updateSub/' + id,
+                            type: 'post',
+                            data: payload1,
+                            success: function($xxx){
+                                if($xxx.status == true){
+                                    toastr.success("Product create successfully!");
+                                }
+                                location.reload();
+                            },
+                            error: function($errors){
+                                var listErrors = $errors.responseJSON.errors;
+                                $.each(listErrors, function(key, value) {
+                                    toastr.error(value[0]);
+                                });
+                            }
+                        });
+                    });
         });
-    });
-});
+
+ });
+
 
 </script>
 
@@ -557,23 +514,34 @@ $(document).ready(function() {
 <script type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-
     var table = $('#datatable').DataTable();
-
-    table.on('click', '.callEdit', function() {
-
-
+    table.on('click', '.callSub', function() {
         $tr = $(this).closest('tr');
     if ($($tr).hasClass('child')) {
         $tr = $tr.prev('.parent');
     }
     var data = table.row($tr).data();
+// $('#holderbanner').attr('src', $tr.find('.main img').attr('src'));
 
-    var src = $('#banner').attr('src');
+$('#holdersmall1').attr('src', $tr.find('.small1 img').attr('src'));
 
-    $('#banner').val(src);
+$('#holdersmall2').attr('src', $tr.find('.small2 img').attr('src'));
 
-    $('#holderbanner').attr('src', $tr.find('img').attr('src'));
+$('#holdersub').attr('src', $tr.find('.sub img').attr('src'));
+
+    });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+    var table = $('#datatable2').DataTable();
+    table.on('click', '.callEdit', function() {
+        $tr = $(this).closest('tr');
+    if ($($tr).hasClass('child')) {
+        $tr = $tr.prev('.parent');
+    }
+    var data = table.row($tr).data();
+$('#holderbanner').attr('src', $tr.find('.main img').attr('src'));
 
 
     });

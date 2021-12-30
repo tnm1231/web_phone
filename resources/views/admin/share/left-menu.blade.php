@@ -25,7 +25,7 @@
                                     </g>
                                 </g>
                             </svg></span>
-                        <h2 class="brand-text">Vuexy</h2>
+                        <h2 class="brand-text">Admin</h2>
                     </a></li>
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
             </ul>
@@ -33,37 +33,63 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="menu"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Category</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
                     <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Analytics</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/category/create"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Create</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">eCommerce</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/category/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Index</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="grid"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Brand</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+                    <ul class="menu-content">
+                        <li><a class="d-flex align-items-center" href="/admin/brand/create"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Create</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="/admin/brand/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Index</span></a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="folder"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Product</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
                     <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Analytics</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/product/create"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Create</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">eCommerce</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/product/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Index</span></a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="map"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Banner</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
                     <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Analytics</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/banner/create"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Create</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">eCommerce</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Index</span></a>
                         </li>
                     </ul>
                 </li>
 
             </ul>
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Storage</span><span class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+                    <ul class="menu-content">
+                        <li><a class="d-flex align-items-center" href="/admin/category/create"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Manage storage</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="/admin/category/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Don Hang</span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/category/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Danh sach don hang (List order) </span></a>
+                        <li><a class="d-flex align-items-center" href="/admin/category/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Danh sach user (List user) </span></a>
+
+
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
         </div>
     </div>

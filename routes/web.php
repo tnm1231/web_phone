@@ -73,6 +73,7 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::get('/delete/{id}', [\App\Http\Controllers\MainBannerController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\MainBannerController::class, 'edit']);
         Route::post('/update/{id}', [\App\Http\Controllers\MainBannerController::class, 'update']);
+        Route::post('/updateSub/{id}', [\App\Http\Controllers\MainBannerController::class, 'updateSub']);
 
         Route::get('/editSub/{id}', [\App\Http\Controllers\MainBannerController::class, 'editSub']);
 

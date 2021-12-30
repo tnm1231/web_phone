@@ -158,6 +158,13 @@ class MainBannerController extends Controller
         $banner->update($data);
         return response()->json(['status' => true]);
     }
+    public function updateSub(Request $request)
+    {
+        $data = $request->all();
+        $banner = MainBanner::find($request->id);
+        $banner->update($data);
+        return response()->json(['status' => true]);
+    }
 
     /**
      * Remove the specified resource from storage.
