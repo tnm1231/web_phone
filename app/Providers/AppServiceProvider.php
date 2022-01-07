@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\category;
+use App\Models\brand;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
+        $category = category::where('is_view', 1)->get();
+        $brand = brand::where('is_view', 1)->get();
+        view()->share('category', $category);
+        view()->share('brand', $brand);
     }
 }

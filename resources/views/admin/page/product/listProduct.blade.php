@@ -410,6 +410,7 @@
                         success: function($xxx){
                             if($xxx.status == true){
                                 toastr.success("Updated product successfully!");
+                                window.location.href = "/login"
                             }
                             location.reload();
                         },

@@ -7,11 +7,16 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Auth\RegisterRequest;
 use App\Http\Requests\Admin\Category\categoryRequest;
+use App\Http\Requests\RequestPassword;
 use App\Mail\registerMail;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Jobs\sendMailJob;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+use function PHPSTORM_META\type;
 
 class AdminController extends Controller
 {
@@ -42,9 +47,6 @@ class AdminController extends Controller
          $data = $request->all();
         return view('admin.page.auth.verify');
      }
-
-
-
     public function viewForget()
     {
         return view('admin.page.auth.forget');
@@ -69,6 +71,24 @@ class AdminController extends Controller
         dd($id);
         Auth::logout($id);
         return redirect('/admin/login');
+    }
+    public function reset()
+    {
+        return view('admin.page.auth.reset');
+    }
+    public function saveUpdatePassword(RequestPassword $requestPassword)
+    {
+
+        // if (Hash::check($requestPassword->password_old,get_data_user(type:'web', field: 'password')))
+        // {
+        //     $admin = Admin::find(get_data_user(type:'web'));
+        //     $admin->password = bcrypt($requestPassword->password);
+        //     $admin->save();
+
+        //     return redirect()->back()->with('success','cap nhat thanh cong');
+        // }
+        // return redirect()->back()->with('danger','mat khau cu khogn dung');
+
     }
 
 

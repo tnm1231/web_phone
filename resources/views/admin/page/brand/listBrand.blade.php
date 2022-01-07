@@ -191,10 +191,10 @@ $(document).ready(function() {
     $("#delete_only").click(function(){
         var id = $("#brand_id").val();
         $.ajax({
-            url: '/admin/categories/delete_only/' + id,
+            url: '/admin/brand/delete-only/' + id,
             type: 'get',
             success: function($data) {
-                toastr.success('Delete one category successfully!', 'Success');
+                toastr.success('Brand has been deleted successfully!', 'Success');
                 $(row).closest('tr').remove();
                 $('#addNewCard').modal('hide');
             }

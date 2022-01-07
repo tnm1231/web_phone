@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Models\product;
+use App\Models\category;
 use App\Http\Requests\Admin\Brand\updateRequest;
 
 class BrandController extends Controller
@@ -27,7 +28,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.page.brand.create');
+        $category = category::where('is_view',1)->get();
+        return view('admin.page.brand.create',compact('category'));
     }
 
     /**
@@ -39,6 +41,8 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        foreach ($en as $key => $value) {
+            Brand::create($data);        }
         Brand::create($data);
 
         return response()->json(['status' => true]);
@@ -111,6 +115,21 @@ class BrandController extends Controller
                 $value->delete();
             }
             return response()->json(true);
+        }
+        return response()->json(false);
+    }
+    public function destroyOnly($id)
+    {
+        $brand = Brand::find($id);
+        if($brand){
+            $brand->delete();
+            $listbrand = Brand::where('parent_id', $id)->get();
+            foreach ($listbrand as $key => $value) {
+                $value->parent_id=0;
+                $value->save();
+            }
+        return response()->json(true);
+
         }
         return response()->json(false);
     }

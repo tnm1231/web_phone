@@ -92,9 +92,19 @@
                                 <h2 class="card-title fw-bold mb-1">Forgot Password? 🔒</h2>
                                 <p class="card-text mb-2">Enter your email and we'll send you instructions to reset your password</p>
                                 <form class="auth-forgot-password-form mt-2" action="auth-reset-password-cover.html" method="POST">
+                                    @csrf
+                                    @if(session('status'))
+                                    <div class="alert alert-success">
+                                        {{session('status')}}
+                                    </div>
+                                    @endif
                                     <div class="mb-1">
                                         <label class="form-label" for="forgot-password-email">Email</label>
                                         <input class="form-control" id="email" type="text" name="email" placeholder="john@example.com" aria-describedby="forgot-password-email" autofocus="" tabindex="1" />
+                                        <span class="text-danger">@error('email')
+                                            {{$message}}
+                                        @enderror
+                                        </span>
                                     </div>
                                     <button class="btn btn-primary w-100" tabindex="2">Send reset link</button>
                                 </form>

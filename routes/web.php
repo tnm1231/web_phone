@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,7 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::get('/create', [\App\Http\Controllers\BrandController::class, 'create']);
         Route::post('/create', [\App\Http\Controllers\BrandController::class, 'store']);
         Route::get('/index', [\App\Http\Controllers\BrandController::class, 'index']);
+        Route::get('/delete-only/{id}', [\App\Http\Controllers\BrandController::class, 'destroyOnly']);
         Route::get('/delete_all/{id}', [\App\Http\Controllers\BrandController::class, 'destroyAll']);
         Route::get('/update_isview/{id}', [\App\Http\Controllers\BrandController::class, 'updateIsview']);
         Route::get('/edit/{id}', [\App\Http\Controllers\BrandController::class, 'edit']);
@@ -96,16 +99,52 @@ Route::post('/admin/login', [\App\Http\Controllers\AdminController::class, 'logi
 Route::get('/admin/forget', [\App\Http\Controllers\AdminController::class, 'viewForget']);
 Route::get('/admin/logout', [\App\Http\Controllers\AdminController::class, 'logout']);
 Route::get('/admin/verify', [\App\Http\Controllers\AdminController::class, 'verify']);
+Route::get('/admin/reset', [\App\Http\Controllers\AdminController::class, 'reset']);
+// Route::get('/password', [\App\Http\Controllers\AdminController::class, 'updatePassword']);
+Route::post('/password', [\App\Http\Controllers\AdminController::class, 'saveUpdatePassword']);
 
 Route::get('/admin/manage', [\App\Http\Controllers\ManageController::class, 'index']);
 Route::post('/admin/manage/create', [\App\Http\Controllers\ManageController::class, 'store']);
 
+Route::group(['middleware' => 'CheckUser'], function() {
 
-    Route::get('/client/index', [\App\Http\Controllers\HomeController::class, 'index']);
+    // Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+ });
+ Route::get('/client/index', [\App\Http\Controllers\HomeController::class, 'index']);
+
     Route::get('/client/error', [\App\Http\Controllers\HomeController::class, 'error']);
     Route::get('/client/profile', [\App\Http\Controllers\HomeController::class, 'profile']);
     Route::get('/client/detail', [\App\Http\Controllers\HomeController::class, 'detail']);
     Route::get('/client/category', [\App\Http\Controllers\HomeController::class, 'cate']);
     Route::get('/client/checkout', [\App\Http\Controllers\HomeController::class, 'checkout']);
+    Route::get('/client/shopCate/{id}', [\App\Http\Controllers\HomeController::class, 'shopCate']);
+    Route::get('/client/cart', [\App\Http\Controllers\HomeController::class, 'cart']);
+
+
+
+
+
+
+    Route::group([], function() {
+    Route::get('/register', [\App\Http\Controllers\UserController::class, 'viewRegister']);
+    Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
+
+    Route::get('/login', [\App\Http\Controllers\UserController::class, 'viewLogin']);
+    Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
+
+    Route::get('/forget', [\App\Http\Controllers\UserController::class, 'viewForget']);
+    Route::post('/forget', [\App\Http\Controllers\UserController::class, 'forget'])->name('sendReset');
+
+
+
+    Route::post('/confirm', [\App\Http\Controllers\UserController::class, 'confirm']);
+
+    Route::get('/logout', [\App\Http\Controllers\UserController::class, 'logout']);
+    Route::get('/reset', [\App\Http\Controllers\UserController::class, 'reset']);
+    Route::get('/active/{xxx}', [\App\Http\Controllers\UserController::class, 'Active']);
+
+
+    });
+
 
 

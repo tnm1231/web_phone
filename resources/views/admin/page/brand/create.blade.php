@@ -46,7 +46,7 @@
                                       $('.lfm').filemanager('banner');
                                 </script>
                             </div>
-                            </div>
+                        </div>
                         <div class="form-group col-xl-6 col-md-6 col-12">
                         <div class="row">
                             <div class="col-md-12">
@@ -64,8 +64,16 @@
                             </script>
                         </div>
                         </div>
+                        <div class="form-group col-xl-3 col-md-6 col-12">
+                            <label class="form-label" for="basicInput">Category_id</label>
+                                <select class="form-control" id="category_id" required="">
+                                    <option value="">Choose...</option>
+                                    @foreach ($category as $value)
+                                    <option value={{$value->id}}>{{$value->name}}</option>
+                                    @endforeach
 
-
+                                </select>
+                            </div>
                         <div class="row" style="margin-top: 20px;">
                             <div class="col-4">
                             <button type="button" id="createBrand" class="btn btn-outline-success round waves-effect">Button</button>
@@ -110,6 +118,7 @@
                     'name'              :   $("#name").val(),
                     'slug'              :   $("#slug").val(),
                     'parent_id'         :   $("#parent_id").val(),
+                    'category_id'       :   $("#category_id").val(),
                     'is_view'           :   $("#is_view").val(),
                     'banner'            :   $("#banner").val(),
                     'icon'              :   $("#icon").val(),
