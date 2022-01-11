@@ -9,6 +9,7 @@ use App\Models\category;
 use App\Models\MainBanner;
 use App\Models\SubBanner;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -32,17 +33,46 @@ class HomeController extends Controller
 
         return view('client.index', compact('newArrival','bestSeller','comingsoon','outofstock','listCategory','mainBanner','subBanner','product'));
     }
-    public function shopCate($id)
+    public function shopCate($slug)
     {
+        $i = 0;
+        for($i = strlen($slug)-1; $i >= 0; $i--){
+            if($slug[$i] == '-'){
+                break;
+            }
+        }
+        $id = Str::substr($slug, $i + 1, strlen($slug)- $i);
+
         $data = category::find($id);
+
         if($data){
             $product = product::where('category_id', $data->id)->get();
-            return view('client.index', compact('product', 'data'));
+            return view('client.shopCate', compact('product', 'data'));
         } else {
             toastr()->error("Product is not exits");
             return redirect('/');
         }
-        return view('client.shopCate');
+        // return view('client.shopCategory');
+    }
+    public function shopBrand($slug)
+    {
+        $i = 0;
+        for($i = strlen($slug)-1; $i >= 0; $i--){
+            if($slug[$i] == '-'){
+                break;
+            }
+        }
+        $id = Str::substr($slug, $i + 1, strlen($slug)- $i);
+
+        $data = Brand::find($id);
+        $banner = Brand::all();
+        if($data){
+            $product = product::where('brand_id', $data->id)->get();
+            return view('client.shopBrand', compact('product', 'data','banner'));
+        } else {
+            toastr()->error("Product is not exits");
+            return redirect('/');
+        }
     }
     public function cart()
     {
@@ -55,8 +85,25 @@ class HomeController extends Controller
     public function profile(){
         return view('client.profile');
     }
-    public function detail(){
-        return view('client.detail');
+    public function detail($slug)
+    {
+        $i = 0;
+        for($i = strlen($slug)-1; $i >= 0; $i--){
+            if($slug[$i] == '-'){
+                break;
+            }
+        }
+        $id = Str::substr($slug, $i + 1, strlen($slug)- $i);
+
+        $data = Product::find($id);
+        $products = Product::all();
+        if($data){
+            $product = product::where('id', $data->id)->get();
+            return view('client.detail', compact('product', 'data','products'));
+        } else {
+            toastr()->error("Product is not exits");
+            return redirect('/');
+        }
     }
     public function cate(){
         return view('client.cate');

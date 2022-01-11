@@ -230,9 +230,9 @@
                     <div class="hb-menu">
                         <nav>
                             <ul>
-                                <li style="margin-right:8px"><a href="/">Home</a></li>
+                                <li style="margin-right:8px"><a href="/client/index">Home</a></li>
                                 @foreach ($category as $value )
-                                <li style="margin-right:8px"><a href="/">{{$value->name}}</a></li>
+                                <li style="margin-right:8px"><a href="/client/shopCate/{{$value->slug}}-{{$value->id}}">{{$value->name}}</a></li>
                                 @endforeach
 
                             </ul>

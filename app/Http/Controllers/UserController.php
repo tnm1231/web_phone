@@ -13,6 +13,7 @@ use App\Http\Requests\User\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
+
 class UserController extends Controller
 {
     public function viewRegister()
@@ -55,7 +56,6 @@ class UserController extends Controller
             }
         } else {
             return response()->json(['status' => 0, 'message' => 'Your email or pass is wrong']);
-
         }
     }
     public function Active($xxx)
@@ -85,8 +85,10 @@ class UserController extends Controller
     $data = $request->all();
     $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
     $title_mail = "Lay lai mat khau".' '.$now;
-    $user = User::where('email','=',$data['email_account'])->first();
-    $id= Auth::id();
+    $user = User::where('email','=',$data['email_account'])->get();
+    foreach ($user as $value) {
+        $user_id = $value->id;
+    }
 
     if($user){
         $count_user = $user->count();
@@ -94,12 +96,12 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Email chua duoc dang ky de khoi phuc mat khau');
         }else {
             $token_random = Str::random();
-            $user = User::find($id);
+            $user = User::find($user_id);
             $user->token = $token_random;
             $user->save();
 
             $to_email = $data['email_account'];
-            $link_reset_pass = url('update-new-pass?email='.$to_email, '&token='.$token_random);
+            $link_reset_pass = url('/update-new-pass?email='.$to_email.'&token='.$token_random);
 
             $data = array('name'=>$title_mail,'body'=>$link_reset_pass,'email'=>$data['email_account']);
 
@@ -111,17 +113,42 @@ class UserController extends Controller
             return redirect()->back()->with('message', 'Gui mail thanh cong,vui long vao email de reset password');
         }
     }
+    }
 
 
+    public function updateNewPass(Request $request)
+    {
+        $meta_desc = "Quen mat khau";
+        $meta_keywords = "Ques Mat Khau";
+        $meta_title = "Quen Mat Khau";
+        $url_canonical = $request->url();
+        return view('client.auth.repass',compact('meta_desc','meta_keywords','meta_title','url_canonical'));
+    }
+    public function ResetPass(Request $request)
+    {
+       $data = $request->all();
+       $token_random = Str::random();
+       $user = User::where('email','=',$data['email'])->where('token','=',$data['token'])->get();
+       $count = $user->count();
+       foreach ($user as $value) {
+        $user_id = $value->id;
+    }
+       if($count>0){
 
-
+           $reset = User::find($user_id);
+           $reset->password = bcrypt($data['password']);
+           $reset->token = $token_random;
+           $reset->save();
+           return redirect('/login')->with ('message','Mat khau da cap nhat moi. quay lai trang dang nhap');
+       }else{
+           return redirect('client.auth.forget')->with('error', 'vui long nhap lai email vi link nay da qua han');
+       }
     }
     public function logout()
     {
         Auth::logout();
         return redirect('/client/logout');
     }
-
     public function reset()
     {
         return view('client.auth.reset');

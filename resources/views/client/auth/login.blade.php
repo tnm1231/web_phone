@@ -25,7 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
 		<h1>Creative SignUp Form</h1>
-        <form action="/forget" method="post">
+
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 
@@ -41,7 +41,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 		<!-- copyright -->
-    </form>
+
 		<div class="colorlibcopy-agile">
 			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
 		</div>
@@ -65,7 +65,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //main -->
 </body>
 
-{{-- <script>
+<script>
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -112,5 +112,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 });
             });
         });
-    </script> --}}
+    </script>
 </html>

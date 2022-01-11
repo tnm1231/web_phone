@@ -70,7 +70,7 @@
                             <!-- single-product-wrap start -->
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="single-product.html">
+                                    <a href="/client/detail/{{$value->slug}}-{{$value->id}}">
                                         <img src="{{$value->image_product}}" alt="Li's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
@@ -79,7 +79,7 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                <a href="">Rating</a>
                                             </h5>
                                             <div class="rating-box">
                                                 <ul class="rating">
@@ -92,9 +92,10 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h4><a class="product_name" href="single-product.html">{{$value->name}}</a></h4>
+                                        <h4><a class="product_name" href="/client/detail/{{$value->slug}}-{{$value->id}}">{{$value->name}}</a></h4>
                                         <div class="price-box">
-                                            <span class="new-price">{{number_format($value->price_root,0,',','.') . "đ"}}</span>
+                                            <span class="new-price new-price-2">{{ empty($value->price_sell) ?  number_format($value->price_root, 0, '.', ',') . " đ" : number_format($value->price_sell, 0, '.', ',') . " đ"}}</span>
+                                            <span class="old-price">{{ empty($value->price_sell) ?  '' : number_format($value->price_root, 0, '.', ',') . " đ" }}</span>                                                </div>
                                         </div>
                                     </div>
                                     <div class="add-actions">
@@ -120,7 +121,7 @@
                             <!-- single-product-wrap start -->
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="single-product.html">
+                                    <a href="/client/detail/{{$value->slug}}-{{$value->id}}">
                                         <img src="{{$value->image_product}}" alt="Li's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
@@ -129,7 +130,7 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                <a href="shop-left-sidebar.html">Rating</a>
                                             </h5>
                                             <div class="rating-box">
                                                 <ul class="rating">
@@ -142,9 +143,12 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h4><a class="product_name" href="single-product.html">{{$value->name}}</a></h4>
+                                        <h4><a class="product_name" href="/client/detail/{{$value->slug}}-{{$value->id}}">{{$value->name}}</a></h4>
                                         <div class="price-box">
                                             <span class="new-price">{{number_format($value->price_root,0,',','.') . "đ"}}</span>
+                                        </div> <div class="price-box">
+                                            <span class="new-price new-price-2">{{ empty($value->price_sell) ?  number_format($value->price_root, 0, '.', ',') . " đ" : number_format($value->price_sell, 0, '.', ',') . " đ"}}</span>
+                                            <span class="old-price">{{ empty($value->price_sell) ?  '' : number_format($value->price_root, 0, '.', ',') . " đ" }}</span>                                                </div>
                                         </div>
                                     </div>
                                     <div class="add-actions">
@@ -195,7 +199,7 @@
 
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="single-product.html">
+                                    <a href="/client/detail/{{$value_pro->slug}}-{{$value_pro->id}}">
                                         <img src="{{$value_pro->image_product}}" alt="Li's Product Image">
                                     </a>
                                     <span class="sticker" style="color: rgb(231, 237, 241)">
@@ -208,7 +212,7 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                <a href="/">Rating</a>
                                             </h5>
                                             <div class="rating-box">
                                                 <ul class="rating">
@@ -221,9 +225,10 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h4><a class="product_name" href="single-product.html"></a></h4>
+                                        <h4><a class="product_name" href="/client/detail/{{$value_pro->slug}}-{{$value_pro->id}}"></a></h4>
                                         <div class="price-box">
-                                            <span class="new-price"></span>
+                                            <span class="new-price new-price-2">{{ empty($value_pro->price_sell) ?  number_format($value_pro->price_root, 0, '.', ',') . " đ" : number_format($value_pro->price_sell, 0, '.', ',') . " đ"}}</span>
+                                            <span class="old-price">{{ empty($value_pro->price_sell) ?  '' : number_format($value_pro->price_root, 0, '.', ',') . " đ" }}</span>                                                </div>
                                         </div>
                                     </div>
                                     <div class="add-actions">
@@ -305,7 +310,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="single-product.html">
+                                            <a href="/client/detail/">
                                                 <img src="{{$value->image_product}}" alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
@@ -314,7 +319,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                        <a href="shop-left-sidebar.html">Rating</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
@@ -327,11 +332,11 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <h4><a class="product_name" href="single-product.html">{{$value->name}}</a></h4>
+                                                <h4><a class="product_name" href="/client/detail/">{{$value->name}}</a></h4>
                                                 <div class="price-box">
-                                                    <span class="new-price">{{number_format($value->price_root,0,',','.') . "đ"}}</span>
+                                                    <span class="new-price new-price-2">{{ empty($value->price_sell) ?  number_format($value->price_root, 0, '.', ',') . " đ" : number_format($value->price_sell, 0, '.', ',') . " đ"}}</span>
+                                                    <span class="old-price">{{ empty($value->price_sell) ?  '' : number_format($value->price_root, 0, '.', ',') . " đ" }}</span>                                                </div>
                                                 </div>
-                                            </div>
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
                                                     <li class="add-cart active"><a href="#">Add to cart</a></li>
@@ -378,7 +383,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="single-product.html">
+                                            <a href="/client/detail/{{$value->slug}}-{{$value->id}}">
                                                 <img src="{{$value->image_product}}" alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
@@ -387,7 +392,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                        <a href="shop-left-sidebar.html">Rating</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
@@ -400,11 +405,11 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <h4><a class="product_name" href="single-product.html">{{ $value_pro->name }}</a></h4>
+                                                <h4><a class="product_name" href="/client/detail/{{$value->slug}}-{{$value->id}}">{{ $value_pro->name }}</a></h4>
                                                 <div class="price-box">
-                                                    <span class="new-price">{{number_format($value->price_root,0,',','.') . "đ"}}</span>
+                                                    <span class="new-price new-price-2">{{ empty($value->price_sell) ?  number_format($value->price_root, 0, '.', ',') . " đ" : number_format($value->price_sell, 0, '.', ',') . " đ"}}</span>
+                                                    <span class="old-price">{{ empty($value->price_sell) ?  '' : number_format($value->price_root, 0, '.', ',') . " đ" }}</span>                                                </div>
                                                 </div>
-                                            </div>
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
                                                     <li class="add-cart active"><a href="#">Add to cart</a></li>

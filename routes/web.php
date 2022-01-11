@@ -114,11 +114,13 @@ Route::group(['middleware' => 'CheckUser'], function() {
 
     Route::get('/client/error', [\App\Http\Controllers\HomeController::class, 'error']);
     Route::get('/client/profile', [\App\Http\Controllers\HomeController::class, 'profile']);
-    Route::get('/client/detail', [\App\Http\Controllers\HomeController::class, 'detail']);
+
+    Route::get('/client/detail/{slug}', [\App\Http\Controllers\HomeController::class, 'detail']);
     Route::get('/client/category', [\App\Http\Controllers\HomeController::class, 'cate']);
     Route::get('/client/checkout', [\App\Http\Controllers\HomeController::class, 'checkout']);
-    Route::get('/client/shopCate/{id}', [\App\Http\Controllers\HomeController::class, 'shopCate']);
+    Route::get('/client/shopCate/{slug}', [\App\Http\Controllers\HomeController::class, 'shopCate']);
     Route::get('/client/cart', [\App\Http\Controllers\HomeController::class, 'cart']);
+    Route::get('/client/shopBrand/{slug}', [\App\Http\Controllers\HomeController::class, 'shopBrand']);
 
 
 
@@ -135,9 +137,10 @@ Route::group(['middleware' => 'CheckUser'], function() {
     Route::get('/forget', [\App\Http\Controllers\UserController::class, 'viewForget']);
     Route::post('/forget', [\App\Http\Controllers\UserController::class, 'forget'])->name('sendReset');
 
+    Route::get('/update-new-pass', [\App\Http\Controllers\UserController::class, 'updateNewPass']);
+    // Route::post('/recover-pass', [\App\Http\Controllers\UserController::class, 'RecoverPass']);
 
-
-    Route::post('/confirm', [\App\Http\Controllers\UserController::class, 'confirm']);
+    Route::post('/reset-new-pass', [\App\Http\Controllers\UserController::class, 'ResetPass']);
 
     Route::get('/logout', [\App\Http\Controllers\UserController::class, 'logout']);
     Route::get('/reset', [\App\Http\Controllers\UserController::class, 'reset']);
