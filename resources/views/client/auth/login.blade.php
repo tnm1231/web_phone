@@ -101,6 +101,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             toastr.warning($data.message);
                         } else {
                             toastr.success($data.message);
+
                         }
                     },
                     error: function($errors){

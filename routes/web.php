@@ -124,6 +124,10 @@ Route::group(['middleware' => 'CheckUser'], function() {
 
 
 
+    Route::post('/cart', [\App\Http\Controllers\CartController::class, 'store']);
+    Route::get('/cart/delete/{id}', [\App\Http\Controllers\CartController::class, 'destroy']);
+
+
 
 
 
@@ -132,15 +136,16 @@ Route::group(['middleware' => 'CheckUser'], function() {
     Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
 
     Route::get('/login', [\App\Http\Controllers\UserController::class, 'viewLogin']);
-    Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
+    Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
 
     Route::get('/forget', [\App\Http\Controllers\UserController::class, 'viewForget']);
     Route::post('/forget', [\App\Http\Controllers\UserController::class, 'forget'])->name('sendReset');
 
     Route::get('/update-new-pass', [\App\Http\Controllers\UserController::class, 'updateNewPass']);
-    // Route::post('/recover-pass', [\App\Http\Controllers\UserController::class, 'RecoverPass']);
-
     Route::post('/reset-new-pass', [\App\Http\Controllers\UserController::class, 'ResetPass']);
+
+    Route::get('/change-pass', [\App\Http\Controllers\UserController::class, 'viewChange']);
+    Route::post('/change-pass', [\App\Http\Controllers\UserController::class, 'changePass'])->name('changePass');
 
     Route::get('/logout', [\App\Http\Controllers\UserController::class, 'logout']);
     Route::get('/reset', [\App\Http\Controllers\UserController::class, 'reset']);

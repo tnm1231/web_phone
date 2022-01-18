@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\Auth\ChangePass;
 use App\Http\Requests\User\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -12,6 +13,7 @@ use App\Mail\registerUser;
 use App\Http\Requests\User\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use App\Http\Requests\User\Auth\Repass;
 
 
 class UserController extends Controller
@@ -53,6 +55,8 @@ class UserController extends Controller
                 return response()->json(['status' => 1, 'message' => 'Your account has not been vetified yet!']);
             } else {
                 return response()->json(['status' => 2, 'message' => 'Login successfully']);
+                return redirect('/client/index');
+
             }
         } else {
             return response()->json(['status' => 0, 'message' => 'Your email or pass is wrong']);
@@ -93,7 +97,9 @@ class UserController extends Controller
     if($user){
         $count_user = $user->count();
         if($count_user==0){
-            return redirect()->back()->with('error', 'Email chua duoc dang ky de khoi phuc mat khau');
+            toastr()->warning('Email chua duoc dang ky de khoi phuc mat khau!!');
+            return redirect()->back();
+
         }else {
             $token_random = Str::random();
             $user = User::find($user_id);
@@ -110,7 +116,8 @@ class UserController extends Controller
                 $message->to($data['email'])->subject($title_mail);
                 $message->from($data['email'],$title_mail);
             });
-            return redirect()->back()->with('message', 'Gui mail thanh cong,vui long vao email de reset password');
+            toastr()->success('Gui mail thanh cong,vui long vao email de reset password!!');
+            return redirect()->back();
         }
     }
     }
@@ -139,15 +146,42 @@ class UserController extends Controller
            $reset->password = bcrypt($data['password']);
            $reset->token = $token_random;
            $reset->save();
-           return redirect('/login')->with ('message','Mat khau da cap nhat moi. quay lai trang dang nhap');
+           toastr()->success('Mat khau da cap nhat moi. quay lai trang dang nhap!!');
+           return redirect('/login');
+
        }else{
-           return redirect('client.auth.forget')->with('error', 'vui long nhap lai email vi link nay da qua han');
+           toastr()->error('vui long nhap lai email vi link nay da qua han!!');
+           return redirect('client.auth.forget');
+
        }
+    }
+    public function viewChange()
+    {
+        return view('client.auth.change');
+    }
+    public function changePass(ChangePass $request)
+    {
+        $data = $request->only('email', 'password');
+        $user = $request->all();
+        if(Auth::attempt($data)){
+            $taiKhoan = Auth::user();
+            $taiKhoan->password = bcrypt($user['newPass']);
+            $taiKhoan->save();
+            toastr()->success('Mat khau da cap nhat moi. quay lai trang dang nhap!!');
+            return redirect('/login');
+
+        } else {
+            return response()->json(['status' => 0, 'message' => 'Your email or pass is wrong']);
+        }
+
+
+
+
     }
     public function logout()
     {
         Auth::logout();
-        return redirect('/client/logout');
+        return redirect('/client/index');
     }
     public function reset()
     {

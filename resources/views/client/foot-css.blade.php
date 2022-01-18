@@ -41,3 +41,142 @@
         <script src="/client/js/scrollUp.min.js"></script>
         <!-- Main/Activator js -->
         <script src="/client/js/main.js"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/61e02eb4f7cf527e84d1f5f9/1fp9rcth9';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    {{-- <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script> --}}
+    <script>
+        @if(count($errors) > 0)
+            @foreach($errors->all() as $error)
+                toastr.error("{{$error}}");
+            @endforeach
+            @endif
+    </script>
+
+
+    <!--End of Tawk.to Script-->
+    @jquery
+    @toastr_js
+    @toastr_render
+    <script>
+        $(document).ready(function(){
+            $('#loginButton').click(function(e){
+                var email      = $("#email_login").val();
+                var password     = $("#password_login").val();
+
+                var data = {
+                    'email'    : email,
+                    'password'    : password,
+
+            };
+            $.ajax({
+                    url : '/login',
+                    type: 'post',
+                    data: data,
+                    success: function($data){
+                        if($data.status == 0){
+                            toastr.error($data.message);
+                        } else if($data.status == 1) {
+                            toastr.warning($data.message);
+                        } else {
+                            toastr.success($data.message);
+                            location.reload();
+                        }
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
+            $('#registerButton').click(function(e){
+            var email        = $("#email_register").val();
+            var password     = $("#password_register").val();
+            var re_password  = $("#re_password_register").val();
+            var fullname     = $("#fullname").val();
+            var checkbox     = $('#checkbox').val();
+            var data = {
+                'email'    : email,
+                'password'    : password,
+                're_password'    : re_password,
+                'fullname'    : fullname,
+                'checkbox'    : checkbox,
+
+        };
+        $.ajax({
+                url : '/register',
+                type: 'post',
+                data: data,
+                success: function($xxx){
+                    toastr.success('Đã tạo mới tài khoản thành công');
+                    location.reload();
+                },
+                error: function($errors){
+                    var listErrors = $errors.responseJSON.errors;
+                    $.each(listErrors, function(key, value) {
+                        toastr.error(value[0]);
+                    });
+                }
+            });
+        });
+
+
+        $('#addToCart').click(function(e){
+           console.log('ajsdf');
+
+        )};
+        $.ajax({
+                url : '/register',
+                type: 'post',
+                data: data,
+                success: function($xxx){
+                    toastr.success('Đã tạo mới tài khoản thành công');
+                    location.reload();
+                },
+                error: function($errors){
+                    var listErrors = $errors.responseJSON.errors;
+                    $.each(listErrors, function(key, value) {
+                        toastr.error(value[0]);
+                    });
+                }
+            });
+        });
+    });
+
+    </script>
+<script>
+    $(document).ready(function(){
+        $(".deleteCart").click(function() {
+                var id = $(this).data('id');
+                row = $(this);
+                // console.log("Chuẩn bị xóa loại sản phẩm có id: " + id);
+                $(this).closest('li').remove();
+                $.ajax({
+                    url: '/cart/delete/' + id,
+                    type: 'get',
+                    success: function($data){
+                        // $('#deleteCategory').modal('hide');
+                        toastr.success('Deleted product successfully!!','success');
+                    },
+                });
+
+        });
+    });
+</script>

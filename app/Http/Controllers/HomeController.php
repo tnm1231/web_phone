@@ -10,28 +10,36 @@ use App\Models\MainBanner;
 use App\Models\SubBanner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 
 class HomeController extends Controller
 {
     public function index(){
+
 
         $bestSeller = product::where('feature', 0)->get();
         $newArrival = product::where('feature',1)->get();
         $comingsoon = product::where('status',2)->get();
         $outofstock = product::where('status',1)->get();
 
-
-
         $mainBanner = MainBanner::where('is_view',1)->get();
         $subBanner = SubBanner::all();
         $product= product::where('is_view',1)->get();
+
+
+        $user = Auth::user();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
 
         $listCategory = product::join('categories', 'category_id','categories.id')
                                 ->select('products.category_id','products.brand_id', 'categories.name as nameCate')
                                 ->get();
 
 
-        return view('client.index', compact('newArrival','bestSeller','comingsoon','outofstock','listCategory','mainBanner','subBanner','product'));
+        return view('client.index', compact('newArrival','bestSeller','comingsoon','outofstock','listCategory','mainBanner','subBanner','product','cart'));
     }
     public function shopCate($slug)
     {
@@ -76,8 +84,12 @@ class HomeController extends Controller
     }
     public function cart()
     {
-
-       return view('client.cart');
+        $user = Auth::user();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
+       return view('client.cart',compact('cart'));
     }
     public function error(){
         return view('client.404');

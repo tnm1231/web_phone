@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <p> click vao {{$data['body']}} de rết password</p>
+    <p> click vao {{$data['body']}} de reset password</p>
 </body>
 </html>

@@ -23,16 +23,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body>
 	<!-- main -->
-        @php
-            $token = $_GET['token'];
-            $email = $_GET['email']
-        @endphp
 
 	<div class="main-w3layouts wrapper">
 		<h1>Enter your new password</h1>
-        <form action="/reset-new-pass" method="post">
+        <form action="{{Route('changePass')}}" method="post">
             @csrf
-            @if(session()->has('message'))
+            {{-- @if(session()->has('message'))
             <div class="alert alert-success">
                 {!! session()->get('message') !!}
             </div>
@@ -40,19 +36,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="alert alert-danger">
                 {!! session()->get('error') !!}
             </div>
-            @endif
+            @endif --}}
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-                <input type="hidden" name="email" value={{$email}}>
-                <input type="hidden" name="token" value={{$token}}>
-					<input class="text" type="password"name="password" placeholder="Enter New Password" required="">
-                    <input class="text" type="password" name="repassword" placeholder="Re-Password" required="">
-
+                    <input class="text" type="email" name="email" placeholder="Enter Email" required="" >
+                @if($errors->has('email'))
+                <span class="error-text">
+                    {{$errors->first('email')}}
+                </span>
+                @endif
+                    <br>
+                    <input class="text" type="password" name="password" placeholder="Enter Old Password" required="">
+                        @if($errors->has('password'))
+                            <span class="error-text">
+                                {{$errors->first('password')}}
+                            </span>
+                        @endif
+                        <br>
+					<input class="text" type="password" name="newPass" placeholder="Enter New Password" required="">
+                        @if($errors->has('newPass'))
+                            <span class="error-text">
+                                {{$errors->first('newPass')}}
+                            </span>
+                        @endif
+                        <br>
+                    <input class="text" type="password" name="rePass" placeholder="Re-Password" required="">
+                        @if($errors->has('rePass'))
+                            <span class="error-text">
+                                {{$errors->first('rePass')}}
+                            </span>
+                        @endif
+                        <br>
 					<div class="wthree-text">
 
 						<div class="clear"> </div>
 					</div>
-					<input type="submit"  value="SIGNUP">
+					<input type="submit"  value="Change">
 
 			</div>
 		</div>

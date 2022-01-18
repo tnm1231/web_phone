@@ -99,7 +99,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             };
             $.ajax({
-                    url : '/client/register',
+                    url : '/register',
                     type: 'post',
                     data: data,
                     success: function($xxx){

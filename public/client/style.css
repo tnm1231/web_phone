@@ -1039,7 +1039,7 @@ textarea:focus {
   z-index: 1050;
 }
 .modal-wrapper .modal-dialog {
-  max-width: 880px;
+  /* max-width: 880px; */
 }
 .modal-wrapper .close {
   color: #333333;

@@ -20,7 +20,7 @@ class registerUser extends Mailable
 
     public function build()
     {
-        return $this->view('mail.resetMail', ['data' => $this->dataEmail])
+        return $this->view('mail.register', ['data' => $this->dataEmail])
                     ->subject('Activated account');
 
     }

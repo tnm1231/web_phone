@@ -2,9 +2,14 @@
 <html class="no-js" lang="zxx">
 
 <!-- index28:48-->
+<head>
 @include('client.head-css')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+</head>
     <body>
-
+@php
+    $user = Auth::user();
+@endphp
         <div class="body-wrapper">
             <!-- Begin Header Area -->
         @include('client.top')
@@ -123,11 +128,142 @@
                     </div>
                 </div>
             </div> --}}
+            <div class="modal fade modal-wrapper" id="loginModal" >
+                <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                    <div class="modal-content" style="width:18cm" >
+                        <div class="modal-body">
+                            <h3 class="review-page-title">Login</h3>
+                            <div class="page-section mb-60">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 ">
+                                            <!-- Login Form s-->
+                                            <form action="#">
+                                                <div class="login-form">
+                                                    <h4 class="login-title">Login</h4>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-12 mb-20">
+                                                            <label>Email Address*</label>
+                                                            <input class="mb-0" type="email"  id="email_login" placeholder="Email Address">
+                                                        </div>
+                                                        <div class="col-12 mb-20">
+                                                            <label>Password</label>
+                                                            <input class="mb-0" type="password"  id="password_login" placeholder="Password">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                                                                <input type="checkbox" id="remember_me">
+                                                                <label for="remember_me">Remember me</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+                                                            <a data-toggle="modal" data-target="#registerModal" > Forgot password?</a>
+                                                        </div>
+                                                        <div class="col-md-12 mb-20">
+                                                            <button  id="loginButton" class="register-button mt-0">Login</button>
+                                                        </div>
 
+                                                        <a data-toggle="modal" data-target="#registerModal" > Don't have account? Register here</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modal-wrapper" id="registerModal" >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="review-page-title">Login/Register</h3>
+                            <div class="page-section mb-60">
+                                <div class="container">
+                                    <div class="row">
+
+                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                                            <form action="#">
+                                                <div class="login-form">
+                                                    <h4 class="login-title">Register</h4>
+                                                    <div class="row">
+
+                                                        <div class="col-md-12 col-12 mb-20">
+                                                            <label>FullName</label>
+                                                            <input class="mb-0" id="fullname"  type="text" placeholder="Last Name">
+                                                        </div>
+                                                        <div class="col-md-12 mb-20">
+                                                            <label>Email Address*</label>
+                                                            <input class="mb-0" id="email_register" type="email" placeholder="Email Address">
+                                                        </div>
+                                                        <div class="col-md-6 mb-20">
+                                                            <label>Password</label>
+                                                            <input class="mb-0"  id="password_register" type="password" placeholder="Password">
+                                                        </div>
+                                                        <div class="col-md-6 mb-20">
+                                                            <label>Confirm Password</label>
+                                                            <input class="mb-0" id="re_password_register" type="password"  placeholder="Confirm Password">
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button class="register-button mt-0" id="registerButton">Register</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modal-wrapper" id="forgetModal" >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="review-page-title">Login/Register</h3>
+                            <div class="page-section mb-60">
+                                <div class="container">
+                                    <div class="row">
+
+                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                                            <form action="#">
+                                                <div class="login-form">
+                                                    <h4 class="login-title">Register</h4>
+                                                    <div class="row">
+
+
+                                                        <div class="col-md-12 mb-20">
+                                                            <label>Email Address*</label>
+                                                            <input class="mb-0" id="email_forget" type="email" placeholder="Email Address">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
        @include('client.foot-css')
        @yield('js')
+       <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     </body>
 
 <!-- index30:23-->
 </html>
+

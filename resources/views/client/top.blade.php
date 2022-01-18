@@ -21,9 +21,14 @@
                                 <div class="ht-setting-trigger"><span>Setting</span></div>
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
-                                        <li><a href="login-register.html">My Account</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="login-register.html">Sign In</a></li>
+                                        @if(isset($user))
+                                        <li><a href="">My Account</a></li>
+                                        <li><a href="/client/checkout">Checkout</a></li>
+                                        <li><a href="/logout">Log out</a></li>
+                                        @else
+                                        <li  data-toggle="modal" data-target="#loginModal"><a>Sign In</a></li>
+                                        <li  data-toggle="modal" data-target="#registerModal"><a>Register</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
@@ -165,51 +170,59 @@
                             </li>
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
+                            @php
+                                $thanhTien = 0;
+                                $tongSanPham = 0;
+                            @endphp
+                             @if(isset($cart))
+                             @foreach ($cart as $value )
+                                @php
+                                    $donGia = empty($value->product->price_sell)? $value->product->price_root : $value->product->price_sell;
+                                    $soLuong = $value->qty;
+                                    $thanhTien = $thanhTien + $donGia * $soLuong;
+                                    $tongSanPham += $value->qty;
+                                @endphp
+                            @endforeach
+                            @endif
                             <li class="hm-minicart">
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text">£80.00
-                                        <span class="cart-item-count">2</span>
+                                    <span class="item-text"><span>Giỏ Hàng</span>
+                                        {{-- <span class="cart-item-count">{{$tongSanPham}}</span> --}}
                                     </span>
                                 </div>
                                 <span></span>
+                                @if(isset($cart))
                                 <div class="minicart">
                                     <ul class="minicart-product-list">
+                                        @foreach ($cart as $value )
                                         <li>
-                                            <a href="single-product.html" class="minicart-product-image">
-                                                <img src="/client/images/product/small-size/5.jpg" alt="cart products">
+                                            <a href="/client/detail/{{$value->product->slug}}-{{$value->product->id}}" class="minicart-product-image">
+                                                <img src="{{ $value->product->image_product}}" alt="cart products">
                                             </a>
                                             <div class="minicart-product-details">
-                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                <span>£40 x 1</span>
+                                                <h6><a href="/client/detail/{{$value->product->slug}}-{{$value->product->id}}">{{$value->product->name}}</a></h6>
+                                                <span class="new-price new-price-2">{{ empty($value->product->price_sell) ?  number_format($value->product->price_root, 0, '.', ',') . " đ" : number_format($value->product->price_sell, 0, '.', ',') . "đ"}} x{{$value->qty}}</span>
+
                                             </div>
-                                            <button class="close" title="Remove">
+                                            <button data-id={{$value->id}} class="close deleteCart" title="Remove">
                                                 <i class="fa fa-close"></i>
                                             </button>
                                         </li>
-                                        <li>
-                                            <a href="single-product.html" class="minicart-product-image">
-                                                <img src="/client/images/product/small-size/6.jpg" alt="cart products">
-                                            </a>
-                                            <div class="minicart-product-details">
-                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                <span>£40 x 1</span>
-                                            </div>
-                                            <button class="close" title="Remove">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                        </li>
+                                        @endforeach
+
                                     </ul>
-                                    <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                                    {{-- <p class="minicart-total">SUBTOTAL: <span>{{number_format($thanhTien, 0,'.',',')}}</span></p> --}}
                                     <div class="minicart-button">
-                                        <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
+                                        <a href="/client/cart" class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
-                                        <a href="checkout.html" class="li-button li-button-fullwidth">
+                                        <a href="/client/checkout" class="li-button li-button-fullwidth">
                                             <span>Checkout</span>
                                         </a>
                                     </div>
                                 </div>
+                                @endif
                             </li>
                             <!-- Header Mini Cart Area End Here -->
                         </ul>
