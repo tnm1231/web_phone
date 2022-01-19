@@ -119,9 +119,10 @@ Route::group(['middleware' => 'CheckUser'], function() {
     Route::get('/client/category', [\App\Http\Controllers\HomeController::class, 'cate']);
     Route::get('/client/checkout', [\App\Http\Controllers\HomeController::class, 'checkout']);
     Route::get('/client/shopCate/{slug}', [\App\Http\Controllers\HomeController::class, 'shopCate']);
-    Route::get('/client/cart', [\App\Http\Controllers\HomeController::class, 'cart']);
     Route::get('/client/shopBrand/{slug}', [\App\Http\Controllers\HomeController::class, 'shopBrand']);
 
+    Route::get('/client/view-cart', [\App\Http\Controllers\HomeController::class, 'viewCart']);
+    Route::get('/client/cart', [\App\Http\Controllers\HomeController::class, 'cart']);
 
 
     Route::post('/cart', [\App\Http\Controllers\CartController::class, 'store']);

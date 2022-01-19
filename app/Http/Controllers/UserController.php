@@ -55,8 +55,6 @@ class UserController extends Controller
                 return response()->json(['status' => 1, 'message' => 'Your account has not been vetified yet!']);
             } else {
                 return response()->json(['status' => 2, 'message' => 'Login successfully']);
-                return redirect('/client/index');
-
             }
         } else {
             return response()->json(['status' => 0, 'message' => 'Your email or pass is wrong']);
@@ -171,7 +169,7 @@ class UserController extends Controller
             return redirect('/login');
 
         } else {
-            return response()->json(['status' => 0, 'message' => 'Your email or pass is wrong']);
+            toastr()->success('Your email or pass is wrong!!');
         }
 
 

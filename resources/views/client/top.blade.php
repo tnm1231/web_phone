@@ -214,7 +214,7 @@
                                     </ul>
                                     {{-- <p class="minicart-total">SUBTOTAL: <span>{{number_format($thanhTien, 0,'.',',')}}</span></p> --}}
                                     <div class="minicart-button">
-                                        <a href="/client/cart" class="li-button li-button-fullwidth li-button-dark">
+                                        <a href="/client/view-cart" class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
                                         <a href="/client/checkout" class="li-button li-button-fullwidth">

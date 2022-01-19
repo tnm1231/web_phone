@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="/client/css/responsive.css">
     <!-- Modernizr js -->
     <script src="/client/js/vendor/modernizr-2.8.3.min.js"></script>
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"></script>
     @toastr_css
 

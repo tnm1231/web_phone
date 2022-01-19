@@ -138,31 +138,6 @@
         });
 
 
-        $('#addToCart').click(function(e){
-           console.log('ajsdf');
-
-        )};
-        $.ajax({
-                url : '/register',
-                type: 'post',
-                data: data,
-                success: function($xxx){
-                    toastr.success('Đã tạo mới tài khoản thành công');
-                    location.reload();
-                },
-                error: function($errors){
-                    var listErrors = $errors.responseJSON.errors;
-                    $.each(listErrors, function(key, value) {
-                        toastr.error(value[0]);
-                    });
-                }
-            });
-        });
-    });
-
-    </script>
-<script>
-    $(document).ready(function(){
         $(".deleteCart").click(function() {
                 var id = $(this).data('id');
                 row = $(this);
@@ -178,5 +153,27 @@
                 });
 
         });
+        $("#addToCart").click(function(){
+                var qty      = $("#qty").val();
+                var product_id      = $("#product_id").val();
+                var data = {
+                    'qty'    : qty,
+                    'product_id'    : product_id,
+            };
+            $.ajax({
+                    url : '/cart',
+                    type: 'post',
+                    data: data,
+                    success: function($data){
+                       toastr.success('Da them san pham vao gio hang')
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
     });
-</script>
+    </script>

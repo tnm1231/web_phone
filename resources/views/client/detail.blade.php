@@ -698,31 +698,3 @@
 </div>
 <!-- Quick View | Modal Area End Here -->
 @endsection
-@section('js')
-    <script>
-        $(document).ready(function(){
-            $("#addToCart").click(function(){
-                var qty      = $("#qty").val();
-                var product_id      = $("#product_id").val();
-                var data = {
-                    'qty'    : qty,
-                    'product_id'    : product_id,
-            };
-            $.ajax({
-                    url : '/cart',
-                    type: 'post',
-                    data: data,
-                    success: function($data){
-                       toastr.success('Da them san pham vao gio hang')
-                    },
-                    error: function($errors){
-                        var listErrors = $errors.responseJSON.errors;
-                        $.each(listErrors, function(key, value) {
-                            toastr.error(value[0]);
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-@endsection

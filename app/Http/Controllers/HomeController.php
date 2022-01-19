@@ -53,9 +53,16 @@ class HomeController extends Controller
 
         $data = category::find($id);
 
+
+        $user = Auth::user();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
+
         if($data){
             $product = product::where('category_id', $data->id)->get();
-            return view('client.shopCate', compact('product', 'data'));
+            return view('client.shopCate', compact('product', 'data','cart'));
         } else {
             toastr()->error("Product is not exits");
             return redirect('/');
@@ -74,22 +81,42 @@ class HomeController extends Controller
 
         $data = Brand::find($id);
         $banner = Brand::all();
+
+
+        $user = Auth::user();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
+
         if($data){
             $product = product::where('brand_id', $data->id)->get();
-            return view('client.shopBrand', compact('product', 'data','banner'));
+            return view('client.shopBrand', compact('product', 'data','banner','cart'));
         } else {
             toastr()->error("Product is not exits");
             return redirect('/');
         }
     }
-    public function cart()
+    public function viewCart()
     {
         $user = Auth::user();
         $cart = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
         }
-       return view('client.cart',compact('cart'));
+
+        return view('client.cart', compact('cart'));
+    }
+    public function cart()
+    {
+        $user = Auth::user();
+
+        $data = Cart::join('products', 'products.id','carts.product_id')
+                    ->select('carts.*','products.image_product','products.name','products.price_root','products.price_sell','products.slug')
+                    ->where('carts.user_id', $user->id)
+                    ->where('products.status',0)
+                    ->get();
+       return response()->json(['data' => $data]);
     }
     public function error(){
         return view('client.404');
@@ -107,11 +134,17 @@ class HomeController extends Controller
         }
         $id = Str::substr($slug, $i + 1, strlen($slug)- $i);
 
+        $user = Auth::user();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
+
         $data = Product::find($id);
         $products = Product::all();
         if($data){
             $product = product::where('id', $data->id)->get();
-            return view('client.detail', compact('product', 'data','products'));
+            return view('client.detail', compact('product', 'data','products','cart'));
         } else {
             toastr()->error("Product is not exits");
             return redirect('/');
