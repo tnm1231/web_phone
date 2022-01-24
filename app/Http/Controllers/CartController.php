@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\Cart\CreateCartRequest;
+use App\Models\Address;
 use App\Models\Cart;
+use App\Models\wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +16,6 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +51,18 @@ class CartController extends Controller
 
        return response()->json(['data' => $data]);
     }
+     public function address(Request $request)
+     {
+        $user_id = Auth::user()->id;
+        $data = Cart::where('user_id', $user_id)->first();
+        $data = $request->all();
+        // foreach ($data as $key => $value) {
+        //     Brand::create($data);        }
+        Address::create($data);
 
+        return response()->json(['status' => true]);
+
+    }
     /**
      * Display the specified resource.
      *
@@ -98,14 +107,14 @@ class CartController extends Controller
     {
         $user = Auth::user();
         // $data = Cart::where('id', $id)->where('user_id', $user->id)->where('type', 0)->first();
-        $data = Cart::where('id', $id)->where('user_id', $user->id)->first();
+        $data = Cart::where('id', $id)->where('user_id', $user->id)->where('type', 0)->get();
         if($data){
-            $data->delete();
-            return response()->json(true);
+            foreach($data as $key => $value){
+                $value->delete();
+            }
+            return response()->json(['status' => true]);
         }
-        return response()->json(false);
+        return response()->json(['status' => false]);
     }
-
-
 
 }

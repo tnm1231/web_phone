@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use App\Models\Address;
+use App\Models\wishlist;
 
 class HomeController extends Controller
 {
@@ -37,9 +39,9 @@ class HomeController extends Controller
         $listCategory = product::join('categories', 'category_id','categories.id')
                                 ->select('products.category_id','products.brand_id', 'categories.name as nameCate')
                                 ->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
 
-
-        return view('client.index', compact('newArrival','bestSeller','comingsoon','outofstock','listCategory','mainBanner','subBanner','product','cart'));
+        return view('client.index', compact('newArrival','bestSeller','comingsoon','outofstock','listCategory','mainBanner','subBanner','product','cart','wishlist'));
     }
     public function shopCate($slug)
     {
@@ -116,7 +118,24 @@ class HomeController extends Controller
                     ->where('carts.user_id', $user->id)
                     ->where('products.status',0)
                     ->get();
+
        return response()->json(['data' => $data]);
+    }
+    public function editQty(Request $request)
+    {
+        $user = Auth::user();
+
+        $data = Cart::where('type', 0)->where('user_id', $user->id)->where('id', $request->id)->first();
+
+        if($data) {
+            $data->qty = $request->qty;
+            $data->save();
+            return response()->json(['status' => true]);
+        } else {
+            return response()->json(['status' => false]);
+        }
+
+
     }
     public function error(){
         return view('client.404');
@@ -154,6 +173,57 @@ class HomeController extends Controller
         return view('client.cate');
     }
     public function checkout(){
-        return view('client.checkout');
+        $user = Auth::user();
+        $address = Address::where('user_id',$user->id)->get();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
+        return view('client.checkout', compact('cart','address'));
     }
+
+    public function viewWish()
+    {
+        $user = Auth::user();
+        $cart = null;
+        if($user){
+        $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        }
+        $data = null;
+        if($user){
+            $data = wishlist::where('user_id', $user->id)->get();
+        }
+
+        return view('client.wishlist',compact('data','cart'));
+    }
+    public function wishList(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $data = wishlist::where('product_id', $request->product_id)->where('user_id', $user_id)->first();
+        if($data) {
+            toastr()->error("Product has been already added!!!");
+        }else {
+            $data = $request->all();
+            $data['user_id'] = Auth::user()->id;
+            wishlist::create($data);
+        }
+
+       return response()->json(['data' => $data]);
+    }
+    public function destroyWish($id)
+    {
+        $user = Auth::user();
+        // $data = Cart::where('id', $id)->where('user_id', $user->id)->where('type', 0)->first();
+        $data = wishlist::where('id', $id)->where('user_id', $user->id)->get();
+        if($data){
+            foreach($data as $key => $value){
+                $value->delete();
+            }
+            return response()->json(['status' => true]);
+        }
+        return response()->json(['status' => false]);
+    }
+
 }
+
+

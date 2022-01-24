@@ -162,12 +162,26 @@
                     <div class="header-middle-right">
                         <ul class="hm-menu">
                             <!-- Begin Header Middle Wishlist Area -->
+
+
+
+                            @php
+                                $tongSp = 0;
+                            @endphp
+                            @if(@isset($wishlist))
+                        @foreach ($wishlist as $key=>$value )
+                            @php
+                                $tongSp = $key+1 ;
+                            @endphp
+                        @endforeach
+                            @endif
                             <li class="hm-wishlist">
-                                <a href="wishlist.html">
-                                    <span class="cart-item-count wishlist-item-count">0</span>
+                                <a href="/wishlist-view">
+                                    <span class="cart-item-count wishlist-item-count">{{$tongSp}}</span>
                                     <i class="fa fa-heart-o"></i>
                                 </a>
                             </li>
+
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
                             @php

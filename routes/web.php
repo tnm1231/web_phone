@@ -123,12 +123,16 @@ Route::group(['middleware' => 'CheckUser'], function() {
 
     Route::get('/client/view-cart', [\App\Http\Controllers\HomeController::class, 'viewCart']);
     Route::get('/client/cart', [\App\Http\Controllers\HomeController::class, 'cart']);
-
+    Route::post('/client/cart/editQty', [\App\Http\Controllers\HomeController::class, 'editQty']);
 
     Route::post('/cart', [\App\Http\Controllers\CartController::class, 'store']);
     Route::get('/cart/delete/{id}', [\App\Http\Controllers\CartController::class, 'destroy']);
 
+    Route::post('/cart/address', [\App\Http\Controllers\CartController::class, 'address']);
 
+    Route::get('/wishlist-view', [\App\Http\Controllers\HomeController::class, 'viewWish']);
+    Route::post('/wishlist', [\App\Http\Controllers\HomeController::class, 'wishList']);
+    Route::get('/wishlist/delete/{id}', [\App\Http\Controllers\HomeController::class, 'destroyWish']);
 
 
 

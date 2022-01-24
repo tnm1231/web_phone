@@ -104,7 +104,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a  id="addToCart">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="/wishlist-view"><i class="fa fa-heart-o"></i></a></li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -398,7 +398,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
-                                            <a href="single-product.html">
+                                            <a href="/client/detail/{{$value->slug}}-{{$value->id}}">
                                                 <img src="{{$value->image_product}}" alt="Li's Product Image">
                                             </a>
                                             <span class="{{ $value->price_sell ? "sticker" : " " }}">

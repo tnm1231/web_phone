@@ -175,5 +175,27 @@
                     }
                 });
             });
+
+            $("#addToWishList").click(function(){
+                var product_id      = $("#product_id").val();
+                var data = {
+                    'product_id'    : product_id,
+            };
+            $.ajax({
+                    url : '/wishlist',
+                    type: 'post',
+                    data: data,
+                    success: function($data){
+                       toastr.success('Da them san pham vao muc yeu thich')
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
     });
+
     </script>

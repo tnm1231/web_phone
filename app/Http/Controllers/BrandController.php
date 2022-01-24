@@ -41,7 +41,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        foreach ($en as $key => $value) {
+        foreach ($data as $key => $value) {
             Brand::create($data);        }
         Brand::create($data);
 
