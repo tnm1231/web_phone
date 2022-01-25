@@ -59,6 +59,8 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::post('/update/{id}', [\App\Http\Controllers\BrandController::class, 'update']);
 
     });
+    Route::get('/storage/index', [\App\Http\Controllers\StorageController::class, 'index']);
+
     Route::group(['prefix' => '/banner' ], function(){
         // Route::get('/create', [\App\Http\Controllers\BannerController::class, 'create']);
         // Route::post('/create', [\App\Http\Controllers\BannerController::class, 'store']);

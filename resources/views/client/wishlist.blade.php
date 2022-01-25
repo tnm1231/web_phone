@@ -28,7 +28,8 @@
                                      $status = ['Available','Out of stock', 'Coming soon'];
                                      $color = ['Green','Red','Warning']
                                 @endphp
-                                @foreach ($data as $value )
+                                @if(isset($wishlist))
+                                @foreach ($wishlist as $value )
                                 <tr>
                                     <td class="li-product-remove deleteWishlist" data-wish="{{$value->id}}"><a ><i class="fa fa-times"></i></a></td>
                                     <td class="li-product-thumbnail"><a href="#"><img style="width:100px; height:100px" src="{{$value->wishlist->image_product}}" alt=""></a></td>
@@ -38,7 +39,7 @@
                                     <td class="li-product-add-cart"><a id="t">add to cart</a></td>
                                 </tr>
                                 @endforeach
-
+                                @endif
                             </tbody>
 
                         </table>

@@ -12,6 +12,7 @@
                             <thead>
                                 <tr>
                                     <th class="li-product-remove">Remove</th>
+                                    {{-- <th class="li-product-remove">Select product</th> --}}
                                     <th class="li-product-thumbnail">Images</th>
                                     <th class="cart-product-name">Product</th>
                                     <th class="li-product-price">Unit Price</th>
@@ -42,6 +43,7 @@
                             </tbody>
                         </table>
                     </div>
+
                     <div class="row">
                         <div class="col-12">
                             <div class="coupon-all">
@@ -137,7 +139,7 @@
                         $('#discount').text( new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(discount));
                         $('#total').text( new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(total));
                         $('#coupon').text( new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(coupon));
-                        $(".cart-plus-minus").append('<div class="dec qtybutton"><i class="fa fa-angle-down"></i></div><div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>');
+                        // $(".cart-plus-minus").append('<div class="dec qtybutton"><i class="fa fa-angle-down"></i></div><div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>');
                         $(".qtybutton").on("click", function() {
                             var $button = $(this);
                             var oldValue = $button.parent().find("input").val();
@@ -145,10 +147,10 @@
                             var newVal = parseFloat(oldValue) + 1;
                             } else {
                                 // Don't allow decrementing below zero
-                            if (oldValue > 0) {
+                            if (oldValue > 1) {
                                 var newVal = parseFloat(oldValue) - 1;
                                 } else {
-                                newVal = 0;
+                                newVal = 1;
                             }
                             }
                             $button.parent().find("input").val(newVal);

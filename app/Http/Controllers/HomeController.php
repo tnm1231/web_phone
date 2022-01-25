@@ -13,6 +13,10 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Address;
+use App\Models\district;
+use App\Models\province;
+use App\Models\street;
+use App\Models\ward;
 use App\Models\wishlist;
 
 class HomeController extends Controller
@@ -32,14 +36,18 @@ class HomeController extends Controller
 
         $user = Auth::user();
         $cart = null;
+        $wishlist = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
         }
+
+
 
         $listCategory = product::join('categories', 'category_id','categories.id')
                                 ->select('products.category_id','products.brand_id', 'categories.name as nameCate')
                                 ->get();
-        $wishlist = wishlist::where('user_id', $user->id)->get();
+
 
         return view('client.index', compact('newArrival','bestSeller','comingsoon','outofstock','listCategory','mainBanner','subBanner','product','cart','wishlist'));
     }
@@ -58,13 +66,15 @@ class HomeController extends Controller
 
         $user = Auth::user();
         $cart = null;
+        $wishlist = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
         }
 
         if($data){
             $product = product::where('category_id', $data->id)->get();
-            return view('client.shopCate', compact('product', 'data','cart'));
+            return view('client.shopCate', compact('product', 'data','cart','wishlist'));
         } else {
             toastr()->error("Product is not exits");
             return redirect('/');
@@ -87,13 +97,15 @@ class HomeController extends Controller
 
         $user = Auth::user();
         $cart = null;
+        $wishlist = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
         }
 
         if($data){
             $product = product::where('brand_id', $data->id)->get();
-            return view('client.shopBrand', compact('product', 'data','banner','cart'));
+            return view('client.shopBrand', compact('product', 'data','banner','cart','wishlist'));
         } else {
             toastr()->error("Product is not exits");
             return redirect('/');
@@ -103,11 +115,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $cart = null;
+        $wishlist = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
         }
 
-        return view('client.cart', compact('cart'));
+        return view('client.cart', compact('cart','wishlist'));
     }
     public function cart()
     {
@@ -175,26 +189,31 @@ class HomeController extends Controller
     public function checkout(){
         $user = Auth::user();
         $address = Address::where('user_id',$user->id)->get();
+
         $cart = null;
+        $wishlist = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
         }
-        return view('client.checkout', compact('cart','address'));
+        $district = district::all();
+        $province = province::all();
+        $street = street::all();
+        $ward = ward::all();
+        return view('client.checkout', compact('cart','address','wishlist','district','province','street','ward'));
     }
 
     public function viewWish()
     {
         $user = Auth::user();
         $cart = null;
+        $wishlist = null;
         if($user){
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
-        }
-        $data = null;
-        if($user){
-            $data = wishlist::where('user_id', $user->id)->get();
+        $wishlist = wishlist::where('user_id', $user->id)->get();
         }
 
-        return view('client.wishlist',compact('data','cart'));
+        return view('client.wishlist',compact('wishlist','cart'));
     }
     public function wishList(Request $request)
     {
