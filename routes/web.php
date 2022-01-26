@@ -120,6 +120,12 @@ Route::group(['middleware' => 'CheckUser'], function() {
     Route::get('/client/detail/{slug}', [\App\Http\Controllers\HomeController::class, 'detail']);
     Route::get('/client/category', [\App\Http\Controllers\HomeController::class, 'cate']);
     Route::get('/client/checkout', [\App\Http\Controllers\HomeController::class, 'checkout']);
+    Route::get('/checkout/district/{id}', [\App\Http\Controllers\HomeController::class, 'district']);
+    Route::get('/checkout/ward/{id}', [\App\Http\Controllers\HomeController::class, 'ward']);
+
+
+
+
     Route::get('/client/shopCate/{slug}', [\App\Http\Controllers\HomeController::class, 'shopCate']);
     Route::get('/client/shopBrand/{slug}', [\App\Http\Controllers\HomeController::class, 'shopBrand']);
 

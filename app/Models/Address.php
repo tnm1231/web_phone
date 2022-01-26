@@ -13,9 +13,9 @@ class Address extends Model
         'user_id',
         'fullname',
         'phone',
-        'city',
+        'province',
         'district',
-        'precinct',
+        'ward',
         'detailAdd',
         'email',
     ];

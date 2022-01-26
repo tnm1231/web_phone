@@ -43,7 +43,7 @@
                             @foreach ($address as $value )
                             <div class="checkout-form-list create-acc">
                                 <input id="tickaddress" type="checkbox">
-                                <label>{{$value->fullname}}, {{$value->phone}}, {{$value->detailAdd}}, {{$value->precinct}}, {{$value->district}}, {{$value->city}}</label>
+                                <label>{{$value->fullname}}, {{$value->phone}}, {{$value->detailAdd}}, {{$value->ward}}, {{$value->district}}, {{$value->province}}</label>
                             </div>
                             @endforeach
                         </div>
@@ -225,39 +225,26 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                @foreach ($province as $value_pro)
-                                                <select name="" id="">
-                                                    <option data-code=null value="null">Tỉnh / Thành</option>
-
-                                                    <option data-code="{{$value_pro->_code}}" value="{{$value_pro->id}}">{{$value_pro->_name}}</option>
-
+                                                <select class="province" id="province">
+                                                    <option value="null" >Tỉnh / Thành</option>
+                                                    @foreach ($province as $value_pro)
+                                                    <option value="{{$value_pro->id}}">{{$value_pro->_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6" id="formDistrict">
+                                                <select name="" id="district" class="district" >
+                                                    <option value="null" >Tỉnh / Thành</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6" id="formWard">
+                                                <select id="ward" name="">
+                                                    <option value="null" >Quận / Huyện</option>
                                                 </select>
                                             </div>
 
-                                            @foreach ($district as $value_dis)
-                                            @if ($value_pro->id ==$value_dis->_province_id)
-                                            <div class="col-md-6">
-                                                <select name="" id="">
-                                                    <option data-code=null value="null">Quận / Huyện</option>
-                                                    <option data-code="{{$value_dis->_prefix}}" value="{{$value_dis->id}}">{{$value_dis->_name}}</option>
-                                                </select>
-                                            </div>
-                                            @endif
-                                            @foreach ($ward as $value_wa)
-                                            @if ($value_dis->id == $value_wa->_district_id )
 
-                                            <div class="col-md-6">
-                                                <select name="" id="">
-                                                    <option data-code=null value="null">Phường / Xã</option>
-                                                    <option data-code="{{$value_wa->_prefix}}" value="{{$value_wa->id}}">{{$value_wa->_name}}</option>
 
-                                                </select>
-                                            </div>
-                                            @endif
-
-                                            @endforeach
-                                            @endforeach
-                                            @endforeach
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Địa chỉ chi tiết<span class="required">*</span></label>
@@ -299,22 +286,25 @@
    <script>
     $(document).ready(function(){
 
-        $("#address").click(function(){
+
+
+
+$("#address").click(function(){
                 var user_id      = $("#user_id").val();
                 var fullname      = $("#fullname").val();
                 var phone         = $("#phone").val();
-                var city          = $("#city").val();
-                var district      = $("#phone").val();
-                var precinct      = $("#precinct").val();
+                var province      = $("#province").val();
+                var district      = $("#district").val();
+                var ward         = $("#ward").val();
                 var detailAdd     = $("#detailAdd").val();
                 var email         = $("#email").val();
                 var data = {
                     'user_id'    : user_id,
                     'fullname'    : fullname,
                     'phone'    : phone,
-                    'city'    : city,
+                    'province' : province,
                     'district'    : district,
-                    'precinct'    : precinct,
+                    'ward'    : ward,
                     'detailAdd'    : detailAdd,
                     'email'    : email,
             };
@@ -331,8 +321,52 @@
                             toastr.error(value[0]);
                         });
                     }
-                });
             });
+        });
+
+
+        $(".province").change(function(){
+            var id = $(".province").val();
+                function loadData(){
+                    axios
+                        .get('/checkout/district/' + id)
+                        .then((res) => {
+                            var data = res.data.data;
+                            var html = '';
+
+                            $.each(data, function(key, value) {
+                                var id_dis = value.id;
+                                html += '<option  value="'+ id_dis +'">';
+                                html += value._name;
+                                html += '</option>';
+                            });
+                            $('#formDistrict select').html(html);
+                            });
+                }
+                loadData();
+        });
+        $(".district").change(function(){
+            var id_dis = $(".district").val();
+                function loadData(){
+                    axios
+                        .get('/checkout/ward/' + id_dis)
+                        .then((res) => {
+                            var data = res.data.data;
+                            console.log(data);
+                            var html = '';
+
+                            $.each(data, function(key, value) {
+                                var id_wa = value.id;
+                                html += '<option  value="'+ id_wa +'">';
+                                html += value._name;
+                                html += '</option>';
+                            });
+                            $('#formWard select').html(html);
+                            });
+                }
+                loadData();
+        });
+
     });
 
 </script>

@@ -18,9 +18,9 @@ class CreateAddressesTable extends Migration
             $table->integer('user_id');
             $table->string('fullname');
             $table->string('phone');
-            $table->string('city');
+            $table->string('province');
             $table->string('district');
-            $table->string('precinct');
+            $table->string('ward');
             $table->string('detailAdd');
             $table->string('email')->nullable();
             $table->timestamps();

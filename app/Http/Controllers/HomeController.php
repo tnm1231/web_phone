@@ -196,13 +196,36 @@ class HomeController extends Controller
         $cart = Cart::where('type', 0)->where('user_id', $user->id)->get();
         $wishlist = wishlist::where('user_id', $user->id)->get();
         }
-        $district = district::all();
         $province = province::all();
-        $street = street::all();
-        $ward = ward::all();
-        return view('client.checkout', compact('cart','address','wishlist','district','province','street','ward'));
-    }
+        // $listCategory = product::join('categories', 'category_id','categories.id')
+        // ->select('products.category_id','products.brand_id', 'categories.name as nameCate')
+        // ->get();
+        // $district_id = App\Models\District::where('id', '=', $dis_Val)->get();
 
+        // $district = district::join('province','_province_id','province.id')
+        //                     ->where('district._province_id','=','province.id')
+        //                     ->get();
+        // $street = street::all();
+        // $ward = ward::where('_province_id', $province->id)->where('_district_id',$district->id);
+
+        return view('client.checkout', compact('cart','address','wishlist','province',));
+    }
+    public function district ($id)
+    {
+
+        $data = district::where('_province_id',$id)->get();
+
+       return response()->json(['data' => $data]);
+
+    }
+    public function ward ($id)
+    {
+
+        $data = ward::where('_district_id',$id)->get();
+
+       return response()->json(['data' => $data]);
+
+    }
     public function viewWish()
     {
         $user = Auth::user();
