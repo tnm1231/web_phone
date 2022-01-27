@@ -22,6 +22,18 @@ class Address extends Model
     public function user()
     {
         return $this->belongsTo('\App\Models\product', 'user_id','id');
-
     }
+    public function toProvince()
+    {
+        return $this->belongsTo('\App\Models\province', 'province','id');
+    }
+    public function toDistrict()
+    {
+        return $this->belongsTo('\App\Models\district', 'district','id');
+    }
+    public function toWard()
+    {
+        return $this->belongsTo('\App\Models\ward', 'ward','id');
+    }
+
 }

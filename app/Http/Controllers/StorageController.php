@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StorageController extends Controller
 {
@@ -17,9 +19,9 @@ class StorageController extends Controller
         $user = Auth::user();
 
         $data = Cart::where('type', 0)->where('user_id', $user->id)->where('id', $request->id)->first();
+        $bill = Storage::all();
 
-
-        return view('admin.page.storage.index');
+        return view('admin.page.storage.index',compact('bill','data'));
     }
 
     /**

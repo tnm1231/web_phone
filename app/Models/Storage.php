@@ -10,10 +10,11 @@ class Storage extends Model
     use HasFactory;
     protected $table='storages';
     protected $fillable = [
-        'address_id',
-        'cart_id',
         'user_id',
+        'cart_id',
+        'address_id',
         'bill_id',
+        'status',
     ];
     CONST STATUS_VUA_DAT_HANG         = 0;
     CONST STATUS_DA_XAC_NHAN          = 1;

@@ -5,18 +5,21 @@
         <thead>
             <tr>
                 <th class="text-center">STT</th>
-                <th class="text-center">Name Category</th>
-                <th class="text-center">Banner</th>
+                <th class="text-center">User_id</th>
+                <th class="text-center">Address</th>
+                <th class="text-center">Name Product</th>
+                <th class="text-center">Image</th>
+                <th class="text-center">Quantity</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($listCategory as $key => $value )
+            @foreach ($bill as $key => $value )
             <tr class="text-center">
                 <td style="width:30px"> {{$key+1}} </td>
-                <td> {{$value->name}}</td>
-                {{-- <td> {{empty($value->nameParent) ? 'root' : $value->nameParent}}</td> --}}
+                <td> {{$value->user_id}}</td>
+                <td> {{$value->address->detailAdd}}</td>
+                <td> </td>
                 <td><img  id="banneredit" style="width:100px; height:100px" src="{{$value->banner}}"></td>
                 <td>
                     <div class="form-check form-switch">

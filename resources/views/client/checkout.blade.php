@@ -43,7 +43,7 @@
                             @foreach ($address as $value )
                             <div class="checkout-form-list create-acc">
                                 <input id="tickaddress" type="checkbox">
-                                <label>{{$value->fullname}}, {{$value->phone}}, {{$value->detailAdd}}, {{$value->ward}}, {{$value->district}}, {{$value->province}}</label>
+                                <label>{{$value->fullname}}, {{$value->phone}}, {{$value->detailAdd}}, {{$value->toDistrict->_name}}, {{$value->toDistrict->_name}}, {{$value->toProvince->_name}}</label>
                             </div>
                             @endforeach
                         </div>
@@ -199,66 +199,65 @@
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
         <div class="modal-content" style="width:18cm" >
             <div class="modal-body">
-                <h3 class="review-page-title">Login</h3>
+                <h3 class="review-page-title"></h3>
                 <div class="page-section mb-60">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 ">
                                 <form action="#">
                                     <div class="checkbox-form">
-                                        <h3>Billing Details</h3>
+                                        <h3>Add your address below</h3>
                                         <div class="row">
                                             @php
                                                 $user = Auth::user();
                                             @endphp
                                             <input type="hidden" value="{{$user->id}}" id="user_id">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Họ và Tên <span class="required">*</span></label>
-                                                    <input id="fullname" placeholder="" type="text">
+                                                    {{-- <label>Họ và Tên <span class="required">*</span></label> --}}
+                                                    <input id="fullname_dis" placeholder="Fullname *" type="text">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Phone  <span class="required">*</span></label>
-                                                    <input id ="phone" type="text">
+                                                    {{-- <label>Phone  <span class="required">*</span></label> --}}
+                                                    <input id ="phone_dis" placeholder="Phone number *" type="text">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <select class="province" id="province">
-                                                    <option value="null" >Tỉnh / Thành</option>
+                                                    <option value="null">Tỉnh/Thành</option>
                                                     @foreach ($province as $value_pro)
                                                     <option value="{{$value_pro->id}}">{{$value_pro->_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-6" id="formDistrict">
+                                            <div class="col-md-4 mb-3" id="formDistrict">
                                                 <select name="" id="district" class="district" >
-                                                    <option value="null" >Tỉnh / Thành</option>
+                                                    <option value="null" >Quận/Huyện</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-6" id="formWard">
+
+                                            <div class="col-md-4 mb-3" id="formWard">
                                                 <select id="ward" name="">
-                                                    <option value="null" >Quận / Huyện</option>
+                                                    <option value="null" >Xã/Phường</option>
                                                 </select>
                                             </div>
-
-
-
+                                            <br>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Địa chỉ chi tiết<span class="required">*</span></label>
-                                                    <input id="detailAdd" placeholder="12 Le Loi" type="text">
+                                                    {{-- <label>Địa chỉ chi tiết<span class="required">*</span></label> --}}
+                                                    <input placeholder="Detail address * eg: 11 Lê Lợi " id="detailAdd" type="text">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Email Address <span></span></label>
-                                                    <input id="email" placeholder="Your email can be null" type="email">
+                                                    {{-- <label>Email Address <span></span></label> --}}
+                                                    <input id="email_dis" placeholder="Email" type="email">
                                                 </div>
                                             </div>
-
-                                            <button class="btn btn-warning mb-4 ml-4" id="address">Add Address</button>
+                                            <br>
+                                            <button class="btn btn-warning mb-4 ml-4" id="addressButton">Add Address</button>
 
 
                                         </div>
@@ -285,45 +284,6 @@
     </script>
    <script>
     $(document).ready(function(){
-
-
-
-
-$("#address").click(function(){
-                var user_id      = $("#user_id").val();
-                var fullname      = $("#fullname").val();
-                var phone         = $("#phone").val();
-                var province      = $("#province").val();
-                var district      = $("#district").val();
-                var ward         = $("#ward").val();
-                var detailAdd     = $("#detailAdd").val();
-                var email         = $("#email").val();
-                var data = {
-                    'user_id'    : user_id,
-                    'fullname'    : fullname,
-                    'phone'    : phone,
-                    'province' : province,
-                    'district'    : district,
-                    'ward'    : ward,
-                    'detailAdd'    : detailAdd,
-                    'email'    : email,
-            };
-            $.ajax({
-                    url : '/cart/address',
-                    type: 'post',
-                    data: data,
-                    success: function($data){
-                       toastr.success('Da them san pham vao gio hang')
-                    },
-                    error: function($errors){
-                        var listErrors = $errors.responseJSON.errors;
-                        $.each(listErrors, function(key, value) {
-                            toastr.error(value[0]);
-                        });
-                    }
-            });
-        });
-
 
         $(".province").change(function(){
             var id = $(".province").val();
@@ -366,6 +326,49 @@ $("#address").click(function(){
                 }
                 loadData();
         });
+
+
+        $("#addressButton").click(function(){
+                var user_id      = $("#user_id").val();
+                console.log(user_id);
+                var fullname      = $("#fullname_dis").val();
+                console.log(fullname);
+                var phone         = $("#phone_dis").val();
+                console.log(phone);
+                var province      = $("#province").val();
+                var district      = $("#district").val();
+                var ward         = $("#ward").val();
+                var detailAdd     = $("#detailAdd").val();
+                console.log(detailAdd);
+                var email         = $("#email_dis").val();
+                var data = {
+                    'user_id'    : user_id,
+                    'fullname'    : fullname,
+                    'phone'    : phone,
+                    'province' : province,
+                    'district'    : district,
+                    'ward'    : ward,
+                    'detailAdd'    : detailAdd,
+                    'email'    : email,
+            };
+            $.ajax({
+                    url : '/cart/address',
+                    type: 'post',
+                    data: data,
+                    success: function($data){
+                       toastr.success('Your address added successfully!!')
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+            });
+        });
+
+
+
 
     });
 
