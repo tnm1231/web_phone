@@ -95,7 +95,7 @@
                             toastr.warning($data.message);
                         } else {
                             toastr.success($data.message);
-                            location.reload();
+                            setTimeout(function(){location.reload()}, 1000);
                         }
                     },
                     error: function($errors){

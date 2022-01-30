@@ -41,8 +41,9 @@
                           @if(isset($user))
                         <div class="col-md-12">
                             @foreach ($address as $value )
-                            <div class="checkout-form-list create-acc">
-                                <input id="tickaddress" type="checkbox">
+                            <div class="checkout-form-list create-acc ">
+                                <input data-id={{$value->id}} class="getAdd" type="checkbox">
+                                <input type="hidden" id="address_id">
                                 <label>{{$value->fullname}}, {{$value->phone}}, {{$value->detailAdd}}, {{$value->toDistrict->_name}}, {{$value->toDistrict->_name}}, {{$value->toProvince->_name}}</label>
                             </div>
                             @endforeach
@@ -114,9 +115,9 @@
                                 @if(isset($user))
                                 @foreach ($cart as $value )
                                 <tr class="cart_item">
-                                  <td style="font-size:16px" class="cart-product-name">{{$value->product->name}}<strong class="product-quantity"> × {{$value->qty}}</strong></td>
-                                  <td style="font-size:16px" class="cart-product-total"><span class="amount">{{number_format($value->product->price_root*$value->qty,0,'.',',')}}</span></td>
-                                  <td class="cart-product-name"><img src="{{$value->product->image_product}}" style="width:100px;height:100px" alt=""></td>
+                                  <td style="font-size:16px" id="nameProduct" class="cart-product-name">{{$value->product->name}}<strong class="product-quantity"> × {{$value->qty}}</strong></td>
+                                  <td style="font-size:16px" id="qtyProduct" class="cart-product-total"><span class="amount">{{number_format($value->product->price_root*$value->qty,0,'.',',')}}</span></td>
+                                  <td class="cart-product-name" id= "imageProduct"><img src="{{$value->product->image_product}}" style="width:100px;height:100px" alt=""></td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -184,7 +185,7 @@
                               </div>
                             </div>
                             <div class="order-button-payment">
-                                <input value="Place order" type="submit">
+                                <input value="Place order" id="checkout" type="submit">
                             </div>
                         </div>
                     </div>
@@ -330,26 +331,23 @@
 
         $("#addressButton").click(function(){
                 var user_id      = $("#user_id").val();
-                console.log(user_id);
-                var fullname      = $("#fullname_dis").val();
-                console.log(fullname);
-                var phone         = $("#phone_dis").val();
-                console.log(phone);
+                var fullname_dis  = $("#fullname_dis").val();
+                var phone_dis      = $("#phone_dis").val();
                 var province      = $("#province").val();
-                var district      = $("#district").val();
-                var ward         = $("#ward").val();
-                var detailAdd     = $("#detailAdd").val();
-                console.log(detailAdd);
-                var email         = $("#email_dis").val();
+                var district  = $("#district").val();
+                var ward = $("#ward").val();
+                var detailAdd = $("#detailAdd").val();
+                var email = $("#email_dis").val();
                 var data = {
                     'user_id'    : user_id,
-                    'fullname'    : fullname,
-                    'phone'    : phone,
-                    'province' : province,
+                    'fullname'    : fullname_dis,
+                    'phone_dis'    : phone,
+                    'province'    : province,
                     'district'    : district,
                     'ward'    : ward,
                     'detailAdd'    : detailAdd,
-                    'email'    : email,
+                    'email'   : email,
+
             };
             $.ajax({
                     url : '/cart/address',
@@ -367,6 +365,31 @@
             });
         });
 
+        $(".getAdd").click(function(){
+            var id = $(this).data('id');
+            row = $(this);
+            $("#address_id").val(id);
+            });
+        $("#checkout").click(function(){
+            var user_id      = $("#user_id").val();
+            console.log(user_id);
+            var id = $("#address_id").val();
+            // console.log(id);
+                var data = {
+                    'address_id'    : id,
+                    'user_id'       : user_id,
+                };
+                console.log(data);
+            $.ajax({
+                    url : '/cart/checkout/process',
+                    type: 'post',
+                    data: data,
+                    success: function($data){
+                       toastr.success('dat hang thanh cong!!')
+                    },
+
+            });
+        });
 
 
 

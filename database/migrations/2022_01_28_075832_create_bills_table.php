@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartsTable extends Migration
+class CreateBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateCartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->string('hash');
+            $table->integer('status')->default(0)->comment('0: Vừa đặt hàng, 1: Đã xác nhận, 2: Đang giao hàng, 3: Đơn hàng hoàn trả, 4: Đơn hàng thành công');
             $table->integer('user_id');
-            $table->integer('product_id');
-            $table->integer('address')->nullable();
-            $table->integer('qty');
-            $table->integer('type');
-            $table->integer('bill_id')->nullable();
+            $table->integer('address_id');
+            $table->double('total')->nullable();
             $table->timestamps();
+
         });
     }
 
@@ -32,6 +32,6 @@ class CreateCartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('bills');
     }
 }

@@ -59,7 +59,6 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::post('/update/{id}', [\App\Http\Controllers\BrandController::class, 'update']);
 
     });
-    Route::get('/storage/index', [\App\Http\Controllers\StorageController::class, 'index']);
 
     Route::group(['prefix' => '/banner' ], function(){
         // Route::get('/create', [\App\Http\Controllers\BannerController::class, 'create']);
@@ -122,7 +121,7 @@ Route::group(['middleware' => 'CheckUser'], function() {
     Route::get('/client/checkout', [\App\Http\Controllers\HomeController::class, 'checkout']);
     Route::get('/checkout/district/{id}', [\App\Http\Controllers\HomeController::class, 'district']);
     Route::get('/checkout/ward/{id}', [\App\Http\Controllers\HomeController::class, 'ward']);
-
+    Route::post('/cart/checkout/process', [\App\Http\Controllers\CartController::class, 'processCheck']);
 
 
 
@@ -137,6 +136,7 @@ Route::group(['middleware' => 'CheckUser'], function() {
     Route::get('/cart/delete/{id}', [\App\Http\Controllers\CartController::class, 'destroy']);
 
     Route::post('/cart/address', [\App\Http\Controllers\CartController::class, 'address']);
+    Route::get('/cart/view-storage', [\App\Http\Controllers\CartController::class, 'viewStorage']);
 
     Route::get('/wishlist-view', [\App\Http\Controllers\HomeController::class, 'viewWish']);
     Route::post('/wishlist', [\App\Http\Controllers\HomeController::class, 'wishList']);

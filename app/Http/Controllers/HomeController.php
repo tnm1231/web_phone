@@ -129,6 +129,7 @@ class HomeController extends Controller
 
         $data = Cart::join('products', 'products.id','carts.product_id')
                     ->select('carts.*','products.image_product','products.name','products.price_root','products.price_sell','products.slug')
+                    ->where('carts.type', 0)
                     ->where('carts.user_id', $user->id)
                     ->where('products.status',0)
                     ->get();

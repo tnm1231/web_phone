@@ -15,11 +15,8 @@ class CreateStoragesTable extends Migration
     {
         Schema::create('storages', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('product_id');
             $table->integer('cart_id');
-            $table->integer('address_id');
-            $table->integer('bill_id')->nullable();
-            $table->integer('status')->default(0)->comment('0: Vừa đặt hàng, 1: Đã xác nhận, 2: Đang giao hàng, 3: Đơn hàng thành công, 4: Đơn hàng hoàn trả');
             $table->timestamps();
         });
     }

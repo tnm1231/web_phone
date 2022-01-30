@@ -13,7 +13,8 @@ class Cart extends Model
         'user_id',
         'product_id',
         'qty',
-        'price',
+        'bill_id',
+        'address',
         'type',
     ];
 
@@ -22,4 +23,14 @@ class Cart extends Model
         return $this->belongsTo('\App\Models\product', 'product_id','id');
 
     }
+    public function bill()
+    {
+        return $this->belongsTo('\App\Models\Bill', 'bill_id','id');
+    }
+    public function UserAddress()
+    {
+        return $this->belongsTo('\App\Models\Address','address','id');
+
+    }
+
 }
