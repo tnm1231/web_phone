@@ -73,8 +73,50 @@
     @jquery
     @toastr_js
     @toastr_render
+
     <script>
+        // var addToCartButtons = document.getElementsByClassName('single-product-wrap')
+        //     for (var i = 0; i < addToCartButtons.length; i++){
+        //         var button = addToCartButtons[i]
+        //         button.addEventListener('click', addToCartClicked)
+        //     }
+        //     function addToCartClicked(event){
+        //         var button = event.target
+        //         var shopItem = button.parentElement.parentElement.parentElement
+        //         var itemId = shopItem.getElementsByClassName('getId')[0].value;
+        //         console.log(itemId);
+        //     }
+
         $(document).ready(function(){
+            var addToCartButtons = document.getElementsByClassName('single-product-wrap')
+            for (var i = 0; i < addToCartButtons.length; i++){
+                var button = addToCartButtons[i]
+                button.addEventListener('click', addToCartClicked)
+            }
+            function addToCartClicked(event){
+                var button = event.target
+                var shopItem = button.parentElement.parentElement.parentElement
+                var itemId = shopItem.getElementsByClassName('getId')[0].value;
+                var addItem = {
+                    'qty'    : 1,
+                    'product_id'    : itemId,
+                }
+                $.ajax({
+                    url : '/cart',
+                    type: 'post',
+                    data: addItem,
+                    success: function($data){
+                       toastr.success('Da them san pham vao gio hang')
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            }
+
             $('#loginButton').click(function(e){
                 var email      = $("#email_login").val();
                 var password     = $("#password_login").val();
@@ -175,30 +217,27 @@
                     }
                 });
             });
-        $(".directAdd").click(function(){
+        //     var addToCartButtons = document.getElementsByClassName('add-cart')
+        //     for (var i = 0; i < addToCartButtons.length; i++){
+        //         var button = addToCartButtons[i]
+        //         button.addEventListener('click', addToCartClicked)
+        //     }
+        //     function addToCartClicked(event){
+        //         var button = event.target
+        //         var shopItem = button.parentElement.parentElement
+        //         console.log(shopItem);
+        //         var itemId = shopItem.getElementsByClassName('getId')[0].innerText;
+        //         console.log(itemId);
+        //     }
+        // $(".add-cart").click(function(){
+        //     var id = document.getElementsByClassName("getId");
+        //         console.log(id);
 
-            var getId = document.getElementById("toCart").value;
-            console.log(getId);
-                var data = {
-                    'qty'    : 1,
-                    'product_id'    : getId,
-            };
+        // });
 
-            $.ajax({
-                    url : '/cart',
-                    type: 'post',
-                    data: data,
-                    success: function($data){
-                       toastr.success('Da them san pham vao gio hang')
-                    },
-                    error: function($errors){
-                        var listErrors = $errors.responseJSON.errors;
-                        $.each(listErrors, function(key, value) {
-                            toastr.error(value[0]);
-                        });
-                    }
-                });
-            });
+
+
+
             $("#addToWishList").click(function(){
                 var product_id      = $("#product_id").val();
                 var data = {

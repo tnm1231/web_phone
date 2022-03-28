@@ -410,6 +410,8 @@ $(document).ready(function() {
             row = $(this);
             $("#banner_id").val(id);
         });
+
+
         $("#delete_banner").click(function(){
             var id = $("#banner_id").val();
             $.ajax({

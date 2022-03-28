@@ -99,10 +99,10 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             @if(isset($user))
-                                            <input type="text" id="toCart" value="{{$value->id}}">
                                             <li class="add-cart active">
-                                                <a class="directAdd">Add to cart</a>
+                                                <a >Add to cart</a>
                                             </li>
+                                            <input class="getId" type="text" value="{{$value->id}}">
                                             @else
                                             <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
                                             @endif
@@ -160,8 +160,8 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             @if(isset($user))
-                                            <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
-                                            <input type="text" class="getId" value="{{$value->id}}">
+                                            <li class="add-cart active"><a  >Add to cart</a></li>
+                                            <input class="getId" type="text" value="{{$value->id}}">
                                             @else
                                             <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
                                             @endif
@@ -247,8 +247,8 @@
                                             $user = Auth::user();
                                             @endphp
                                          @if(isset($user))
-                                         <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
-                                         <input type="text" class="getId" value="{{$value_pro->id}}">
+                                         <li class="add-cart active"><a  >Add to cart</a></li>
+                                         <input class="getId" type="text" value="{{$value_pro->id}}">
                                          @else
                                          <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
                                          @endif
@@ -362,8 +362,8 @@
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
                                                     @if(isset($user))
-                                                    <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
-                                                    <input type="text" class="getId" value="{{$value->id}}">
+                                                    <li class="add-cart active"><a  >Add to cart</a></li>
+                                                      <input class="getId" type="text" value="{{$value->id}}">                                                    <input class="getId" type="text" value="{{$value->id}}">
                                                     @else
                                                     <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
                                                     @endif
@@ -410,6 +410,7 @@
                                     <!-- single-product-wrap start -->
                                     <div class="single-product-wrap">
                                         <div class="product-image">
+                                            <input class="getId" type="text" value="{{$value->id}}">
                                             <a href="/client/detail/{{$value->slug}}-{{$value->id}}">
                                                 <img src="{{$value->image_product}}" alt="Li's Product Image">
                                             </a>
@@ -444,9 +445,8 @@
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
                                                     @if(isset($user))
-                                                    <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
-                                                    <input type="text" class="getId" value="{{$value->id}}">
-                                                    @else
+                                                    <li class="add-cart active"><a  >Add to cart</a></li>
+                                                    <input class="getId" type="text" value="{{$value->id}}">                                                    @else
                                                     <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
                                                     @endif
                                                     <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
