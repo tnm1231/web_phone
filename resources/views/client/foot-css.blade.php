@@ -175,7 +175,30 @@
                     }
                 });
             });
+        $(".directAdd").click(function(){
 
+            var getId = document.getElementById("toCart").value;
+            console.log(getId);
+                var data = {
+                    'qty'    : 1,
+                    'product_id'    : getId,
+            };
+
+            $.ajax({
+                    url : '/cart',
+                    type: 'post',
+                    data: data,
+                    success: function($data){
+                       toastr.success('Da them san pham vao gio hang')
+                    },
+                    error: function($errors){
+                        var listErrors = $errors.responseJSON.errors;
+                        $.each(listErrors, function(key, value) {
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
             $("#addToWishList").click(function(){
                 var product_id      = $("#product_id").val();
                 var data = {

@@ -19,7 +19,7 @@
                 <td>{{$value->product->name}}</td>
                 <td>{{$value->qty}}</td>
                 <td>{{$value->fullname}}, {{$value->phone}}, {{$value->wardName}}, {{$value->_name}}, {{$value->provinceName}},</td>
-                <td></td>
+                <td><button class="btn btn-primary">{{$value->status}}</button></td>
                 <td></td>
             </tr>
             @endforeach

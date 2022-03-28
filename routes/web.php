@@ -38,7 +38,7 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::get('/delete-all/{id}', [\App\Http\Controllers\CategoryController::class, 'destroy_all']);
         Route::get('/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'edit']);
         Route::post('/update/{id}', [\App\Http\Controllers\CategoryController::class, 'update']);
-});
+    });
     Route::group(['prefix' => '/product' ], function(){
         Route::get('/create', [\App\Http\Controllers\ProductController::class, 'create']);
         Route::post('/create', [\App\Http\Controllers\ProductController::class, 'store']);
@@ -47,6 +47,9 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::post('/changeView', [\App\Http\Controllers\ProductController::class, 'changeValueView'])->name('change.View');
         Route::get('/edit/{id}', [\App\Http\Controllers\ProductController::class, 'edit']);
         Route::post('/update/{id}', [\App\Http\Controllers\ProductController::class, 'update']);
+    });
+    Route::group(['prefix' => '/coupon' ], function(){
+        Route::get('/create', [\App\Http\Controllers\CouponController::class, 'index']);
     });
     Route::group(['prefix' => '/brand' ], function(){
         Route::get('/create', [\App\Http\Controllers\BrandController::class, 'create']);
@@ -57,9 +60,7 @@ Route::group(['prefix' => '/admin' ], function(){
         Route::get('/update_isview/{id}', [\App\Http\Controllers\BrandController::class, 'updateIsview']);
         Route::get('/edit/{id}', [\App\Http\Controllers\BrandController::class, 'edit']);
         Route::post('/update/{id}', [\App\Http\Controllers\BrandController::class, 'update']);
-
     });
-
     Route::group(['prefix' => '/banner' ], function(){
         // Route::get('/create', [\App\Http\Controllers\BannerController::class, 'create']);
         // Route::post('/create', [\App\Http\Controllers\BannerController::class, 'store']);

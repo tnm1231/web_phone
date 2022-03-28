@@ -8,17 +8,9 @@
                 <div class="slider-area">
                     <div class="slider-active owl-carousel">
                         <!-- Begin Single Slide Area -->
-                        @foreach ($mainBanner as $value)
-                        <div class="single-slide align-center-left  animation-style-01 bg-1" style="background-image: url({{$value->main_banner_1}})">
+                        @foreach ($mainBanner as $valueMain)
+                        <div class="single-slide align-center-left  animation-style-01 bg-1" style="background-image: url({{$valueMain->main_banner_1}})">
                             <div class="slider-progress"></div>
-                            {{-- <div class="slider-content"> --}}
-                                {{-- <h5>Sale Offer <span>-20% Off</span> This Week</h5>
-                                <h2>Chamcham Galaxy S9 | S9+</h2>
-                                <h3>Starting at <span>$1209.00</span></h3>
-                                <div class="default-btn slide-btn">
-                                    <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
-                                </div> --}}
-                            {{-- </div> --}}
                         </div>
                         @endforeach
                         <!-- Single Slide Area End Here -->
@@ -37,7 +29,7 @@
                 </div>
                 <div class="li-banner mt-15 mt-sm-30 mt-xs-30">
                     <a href="#">
-                        <img src="{{$value->small_banner_1}}" alt="">
+                        <img src="{{$value->small_banner_2}}" alt="">
                     </a>
                 </div>
                 @endforeach
@@ -101,9 +93,19 @@
                                             <span class="new-price">{{number_format($value->price_root,0,',','.') . "đ"}}</span>
                                         </div>
                                     </div>
+                                    @php
+                                    $user = Auth::user();
+                                    @endphp
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a  id="addToCart">Add to cart</a></li>
+                                            @if(isset($user))
+                                            <input type="text" id="toCart" value="{{$value->id}}">
+                                            <li class="add-cart active">
+                                                <a class="directAdd">Add to cart</a>
+                                            </li>
+                                            @else
+                                            <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
+                                            @endif
                                             <li><a class="links-details" href="/wishlist-view"><i class="fa fa-heart-o"></i></a></li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -157,7 +159,12 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a id="addToCart">Add to cart</a></li>
+                                            @if(isset($user))
+                                            <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
+                                            <input type="text" class="getId" value="{{$value->id}}">
+                                            @else
+                                            <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
+                                            @endif
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -200,8 +207,7 @@
                             @if($value_pro->category_id == $value->id)
                         <div class="col-lg-12">
                             <!-- single-product-wrap start -->
-                            <input type="hidden" id="product_id" value="{{$value->id}}">
-                                <input type="hidden" id="qty" value=1>
+
                             <div class="single-product-wrap">
                                 <div class="product-image">
                                     <a href="/client/detail/{{$value_pro->slug}}-{{$value_pro->id}}">
@@ -240,11 +246,12 @@
                                             @php
                                             $user = Auth::user();
                                             @endphp
-                                        @if(isset($user))
-                                        <li class="add-cart active"><a  id="addToCart">Add to cart</a></li>
-                                        @else
-                                        <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
-                                        @endif
+                                         @if(isset($user))
+                                         <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
+                                         <input type="text" class="getId" value="{{$value_pro->id}}">
+                                         @else
+                                         <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
+                                         @endif
                                             <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -354,7 +361,12 @@
                                             </div>
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a  id="addToCart">Add to cart</a></li>
+                                                    @if(isset($user))
+                                                    <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
+                                                    <input type="text" class="getId" value="{{$value->id}}">
+                                                    @else
+                                                    <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
+                                                    @endif
                                                     <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                     <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
@@ -431,7 +443,12 @@
                                             </div>
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
-                                                    <li class="add-cart active"><a id="addToCart">Add to cart</a></li>
+                                                    @if(isset($user))
+                                                    <li class="add-cart active"><a  class="directAdd">Add to cart</a></li>
+                                                    <input type="text" class="getId" value="{{$value->id}}">
+                                                    @else
+                                                    <li class="add-cart active"><a  data-toggle="modal" data-target="#loginModal">Add to cart</a></li>
+                                                    @endif
                                                     <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
                                                     <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
@@ -453,5 +470,7 @@
     </div>
 </section>
 
-
+<br>
+<br>
+<br>
 @endsection

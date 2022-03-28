@@ -89,7 +89,7 @@
                     $thanhTien_root = $thanhTien_root + $gia_root* $soLuong;
                     $thanhTien = $thanhTien + $donGia * $soLuong;
                     $tongSanPham += $value->qty;
-                   $discount =  $thanhTien_root - $thanhTien;
+                   $discount =  -$thanhTien_root + $thanhTien;
                 @endphp
             @endforeach
             @endif
@@ -129,8 +129,12 @@
                                 </tr>
                                 <tr class="cart-subtotal text-center">
                                     <th>Discount</th>
-                                    <td><span class="amount">-{{number_format($discount,0,'.',',')}}</span></td>
+                                    <td><span class="amount">{{number_format($discount,0,'.',',')}}</span></td>
                                 </tr>
+                                {{-- <tr class="cart-subtotal text-center">
+                                    <th>Coupon</th>
+                                    <td><span class="amount">-{{number_format($coupon,0,'.',',')}}</span></td>
+                                </tr> --}}
                                 <tr class="order-total text-center">
                                     <th>Order Total</th>
                                     <td><strong><span class="amount">{{number_format($thanhTien,0,'.',',')}}</span></strong></td>
@@ -341,7 +345,7 @@
                 var data = {
                     'user_id'    : user_id,
                     'fullname'    : fullname_dis,
-                    'phone_dis'    : phone,
+                    'phone'    : phone_dis ,
                     'province'    : province,
                     'district'    : district,
                     'ward'    : ward,
@@ -355,6 +359,7 @@
                     data: data,
                     success: function($data){
                        toastr.success('Your address added successfully!!')
+                       location.reload();
                     },
                     error: function($errors){
                         var listErrors = $errors.responseJSON.errors;
@@ -386,6 +391,7 @@
                     data: data,
                     success: function($data){
                        toastr.success('dat hang thanh cong!!')
+                       location.reload();
                     },
 
             });
